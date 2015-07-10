@@ -32,14 +32,7 @@ public class MainActivity extends Activity {
 
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
 
-        savedInstanceState.putBoolean("SAVE_PLAY_ONLINE_STATE", videoView.isPlaying());
-        savedInstanceState.putString("SAVE_PLAY_VIDEO_CHANNEL", playingUri.toString());
-
-        super.onSaveInstanceState(savedInstanceState);
-    }
 
 
 }
