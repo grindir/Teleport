@@ -14,6 +14,7 @@ import android.widget.VideoView;
 public class MainActivity extends Activity {
 
     VideoView videoView;
+
     Uri playingUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
