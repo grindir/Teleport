@@ -1,37 +1,53 @@
 package com.it_lab.teleport;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends Activity {
 
-    VideoView videoView;
-    Uri playingUri;
+public class MainActivity extends ActionBarActivity {
+
+    ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        playingUri= Uri.parse("rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov");
         setContentView(R.layout.activity_main);
-        videoView=(VideoView) findViewById(R.id.videoView);
-        videoView.setVideoURI(playingUri);
-        MediaController mMediaController = new MediaController(this);
-        mMediaController.setMediaPlayer(videoView);
-        mMediaController.setAnchorView(videoView);
-        videoView.setMediaController(mMediaController);
-        videoView.requestFocus(0);
-        videoView.start();
 
+        listView=(ListView) findViewById(R.id.listView);
+        DataAdapter adapter=new DataAdapter(this,initData());
+        listView.setAdapter(adapter);
 
     }
 
+    private List<Data> initData()
+    {
+        List<Data> list=new ArrayList<>();
+        list.add(new Data("#сурскоеморе", ""));
+        list.add(new Data("#паркбелинского",""));
+        list.add(new Data("#эйфелеваябашня", ""));
+
+        return list;
+    }
+    public void onClick(View view)
+    {
+        Intent intent=new Intent(this,VideoPlayActivity.class);
+
+        intent.putExtra("id",""+view.getId());
+        startActivity(intent);
+
+    }
 
 
 
