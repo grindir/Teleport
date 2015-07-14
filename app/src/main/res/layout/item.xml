@@ -16,6 +16,5 @@
         android:layout_height="55dp"
         android:text="Play"
         android:id="@+id/button"
-        android:layout_gravity="right"
-        android:onClick="onClick" />
+        android:layout_gravity="right" />
 </LinearLayout>

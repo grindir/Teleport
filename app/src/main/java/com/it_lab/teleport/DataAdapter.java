@@ -1,10 +1,12 @@
 package com.it_lab.teleport;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -46,8 +48,17 @@ public class DataAdapter extends BaseAdapter {
         }
 
         TextView textView= (TextView) view.findViewById(R.id.textView);
-        textView.setText(getData(position).getTeg());
-
+        final Data data=getData(position);
+        textView.setText(data.getTeg());
+        Button button=(Button) view.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent=new Intent(inflater.getContext(),VideoPlayActivity.class);
+                intent.putExtra("TAG",data.getTeg());
+                intent.putExtra("URI",data.getUri());
+                inflater.getContext().startActivity(intent);
+            }
+        });
         return view;
     }
     private Data getData(int position)

@@ -17,18 +17,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity  {
 
     ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         listView=(ListView) findViewById(R.id.listView);
         DataAdapter adapter=new DataAdapter(this,initData());
         listView.setAdapter(adapter);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     private List<Data> initData()
@@ -40,14 +45,7 @@ public class MainActivity extends ActionBarActivity {
 
         return list;
     }
-    public void onClick(View view)
-    {
-        Intent intent=new Intent(this,VideoPlayActivity.class);
 
-        intent.putExtra("id",""+view.getId());
-        startActivity(intent);
-
-    }
 
 
 
