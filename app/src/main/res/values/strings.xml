@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Teleport</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_video_play_acnivity">VideoPlayAcnivity</string>
+    <string name="title_activity_video_play">VideoPlayActivity</string>
+    <string name="TitleTeleport">Teleport</string>
+    <string name="title_activity_stream">Stream</string>
+</resources>
