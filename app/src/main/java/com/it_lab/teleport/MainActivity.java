@@ -47,6 +47,13 @@ public class MainActivity extends ActionBarActivity  {
     }
 
 
+    public void startStream(View view)
+    {
+        Intent intent=new Intent(this,Stream.class);
+        startActivity(intent);
+    }
+
+
 
 
 }
