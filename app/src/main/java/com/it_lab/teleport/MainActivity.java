@@ -1,13 +1,11 @@
 package com.it_lab.teleport;
 
-import android.app.ActionBar;
+
 import android.app.Activity;
-import android.app.FragmentTransaction;
+
 import android.content.Intent;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
@@ -16,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends Activity  {
+public class MainActivity extends Activity {
 
-    final String LOG_TAG = "myLogs";
+
     ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +27,7 @@ public class MainActivity extends Activity  {
 
 
         listView=(ListView) findViewById(R.id.listView);
-        DataAdapter adapter=new DataAdapter(this,initData());
+        RequestListAdapter adapter=new RequestListAdapter(this,initData());
         listView.setAdapter(adapter);
 
     }
@@ -40,12 +38,11 @@ public class MainActivity extends Activity  {
         return true;
     }
 
-    private List<Data> initData()
+    private List<Request> initData()
     {
-        List<Data> list=new ArrayList<>();
-        list.add(new Data("#сурскоеморе", ""));
-        list.add(new Data("#паркбелинского",""));
-        list.add(new Data("#эйфелеваябашня", ""));
+        List<Request> list=new ArrayList<>();
+        list.add(new Request("#сурскоеморе", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"));
+        list.add(new Request("#паркбелинского","rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"));
 
         return list;
     }
