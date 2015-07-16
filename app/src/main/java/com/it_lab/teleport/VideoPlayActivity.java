@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 
-public class VideoPlayActivity extends Activity {
+public class VideoPlayActivity extends ActionBarActivity {
 
     private VideoView videoView;
     private String uri;
