@@ -17,7 +17,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <VideoView
+    <io.vov.vitamio.widget.VideoView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/videoView"

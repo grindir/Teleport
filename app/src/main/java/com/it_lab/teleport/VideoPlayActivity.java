@@ -6,9 +6,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.MediaController;
+import io.vov.vitamio.MediaPlayer;
 import android.widget.TextView;
-import android.widget.VideoView;
+import io.vov.vitamio.widget.VideoView;
 
 
 public class VideoPlayActivity extends ActionBarActivity {
@@ -23,11 +23,7 @@ public class VideoPlayActivity extends ActionBarActivity {
         videoName.setText(getIntent().getSerializableExtra("TAG").toString());
         uri=getIntent().getSerializableExtra("URI").toString();
 
-        videoView=(VideoView) findViewById(R.id.videoView);
-        videoView.setVideoURI(Uri.parse(uri));
-        videoView.setMediaController(new MediaController(this));
-        videoView.requestFocus();
-        videoView.start();
+
 
     }
 
