@@ -1,8 +1,6 @@
 package com.it_lab.teleport;
 
 
-import android.app.Activity;
-
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -28,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         listView=(ListView) findViewById(R.id.listView);
-        RequestListAdapter adapter=new RequestListAdapter(this,initData());
+        DumpAdapter adapter=new DumpAdapter(this,initData());
         listView.setAdapter(adapter);
 
     }
@@ -42,12 +40,22 @@ public class MainActivity extends ActionBarActivity {
     private List<Request> initData()
     {
         List<Request> list=new ArrayList<>();
-        list.add(new Request("#сурскоеморе", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"));
-        list.add(new Request("#паркбелинского","rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"));
+        list.add(new Request("#demoDay", "http://s-projects.ru:8110/hls/stream2.m3u8"));
+        list.add(new Request("#тестовыйпоток", "http://s-projects.ru:8110/hls/stream1.m3u8"));
 
         return list;
     }
 
+    public void openRequestMe(View view)
+    {
+        Intent intent=new Intent(this,RequestMeActivity.class);
+        startActivity(intent);
+    }
+    public void openMyRequest(View view)
+    {
+        Intent intent=new Intent(this,MyRequestActivity.class);
+        startActivity(intent);
+    }
 
     public void startStream(View view)
     {
