@@ -71,7 +71,7 @@ public class Stream extends Activity implements RtspClient.Callback,
         mSession = SessionBuilder.getInstance()
                 .setContext(getApplicationContext())
                 .setAudioEncoder(SessionBuilder.AUDIO_NONE)
-                .setAudioQuality(new AudioQuality(8000, 16000))
+//                .setAudioQuality(new AudioQuality(8000, 16000))
                 .setVideoEncoder(SessionBuilder.VIDEO_H264)
                 .setSurfaceView(mSurfaceView).setPreviewOrientation(0)
                 .setCallback(this).build();
@@ -92,7 +92,7 @@ public class Stream extends Activity implements RtspClient.Callback,
         path = m.group(3);
 
         mClient.setCredentials(AppConfig.PUBLISHER_USERNAME,
-                AppConfig.PUBLISHER_PASSWORD);
+               AppConfig.PUBLISHER_PASSWORD);
         mClient.setServerAddress(ip, Integer.parseInt(port));
         mClient.setStreamPath("/" + path);
     }

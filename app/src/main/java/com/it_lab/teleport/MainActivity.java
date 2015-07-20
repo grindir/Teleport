@@ -40,8 +40,8 @@ public class MainActivity extends ActionBarActivity {
     private List<Request> initData()
     {
         List<Request> list=new ArrayList<>();
-        list.add(new Request("#demoDay", "http://s-projects.ru:8110/hls/stream2.m3u8"));
-        list.add(new Request("#тестовыйпоток", "http://s-projects.ru:8110/hls/stream1.m3u8"));
+        list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
+        list.add(new Request("#тестовыйпоток", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"));
 
         return list;
     }
