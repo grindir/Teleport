@@ -12,13 +12,13 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by alex on 13.07.15.
+ * Created by alex on 17.07.15.
  */
-public class DataAdapter extends BaseAdapter {
-    private List<Data> list;
+public class RequestMeAdapter extends BaseAdapter {
+    private List<Request> list;
     private LayoutInflater inflater;
 
-    public DataAdapter(Context context,List<Data> list) {
+    public RequestMeAdapter(Context context, List<Request> list) {
         this.list = list;
         inflater=(LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
 
@@ -40,29 +40,38 @@ public class DataAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view=convertView;
         if(view ==null)
         {
-            view=inflater.inflate(R.layout.item,parent,false);
+            view=inflater.inflate(R.layout.item_request_me,parent,false);
         }
 
-        TextView textView= (TextView) view.findViewById(R.id.textView);
-        final Data data=getData(position);
-        textView.setText(data.getTeg());
-        Button button=(Button) view.findViewById(R.id.button);
+        TextView textView= (TextView) view.findViewById(R.id.requestsMeName);
+        final Request request = getRequest(position);
+        final int i= position;
+        textView.setText(request.getTeg());
+        Button button=(Button) view.findViewById(R.id.agree);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent=new Intent(inflater.getContext(),VideoPlayActivity.class);
-                intent.putExtra("TAG",data.getTeg());
-                intent.putExtra("URI",data.getUri());
+                Intent intent = new Intent(inflater.getContext(), Stream.class);
                 inflater.getContext().startActivity(intent);
             }
         });
+        button = (Button) view.findViewById(R.id.unsubscribe);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                list.remove(i);
+                notifyDataSetChanged();
+            }
+        });
+
+
         return view;
     }
-    private Data getData(int position)
+    private Request getRequest(int position)
     {
-        return (Data) getItem(position);
+        return (Request) getItem(position);
     }
 }
+

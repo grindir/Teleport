@@ -25,7 +25,7 @@ public class Stream extends Activity implements RtspClient.Callback,
         Session.Callback, SurfaceHolder.Callback {
 
     // log tag
-    public final static String TAG = MainActivity.class.getSimpleName();
+    public final static String TAG = Stream.class.getSimpleName();
 
     // surfaceview
     private static SurfaceView mSurfaceView;
@@ -41,7 +41,7 @@ public class Stream extends Activity implements RtspClient.Callback,
         // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_stream);
 
         mSurfaceView = (SurfaceView) findViewById(R.id.surface);
 

@@ -28,8 +28,16 @@
         </activity>
         <activity
             android:name=".Stream"
-            android:screenOrientation="landscape"
-            android:label="@string/title_activity_stream" >
+            android:label="@string/title_activity_stream"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".RequestMeActivity"
+            android:label="@string/title_activity_request_me" >
+        </activity>
+        <activity
+            android:name=".MyRequestActivity"
+            android:label="@string/title_activity_my_request" >
         </activity>
     </application>
 

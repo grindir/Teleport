@@ -3,7 +3,7 @@ package com.it_lab.teleport;
 /**
  * Created by alex on 13.07.15.
  */
-public class Data {
+public class Request {
 
     public String teg;
     public String uri;
@@ -24,7 +24,7 @@ public class Data {
         this.uri = uri;
     }
 
-    public Data(String teg, String uri) {
+    public Request(String teg, String uri) {
 
         this.teg = teg;
         this.uri = uri;
