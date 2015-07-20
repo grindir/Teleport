@@ -29,6 +29,7 @@ public class MainActivity extends ActionBarActivity  {
         listView=(ListView) findViewById(R.id.listView);
         DataAdapter adapter=new DataAdapter(this,initData());
         listView.setAdapter(adapter);
+        
 
     }
 
