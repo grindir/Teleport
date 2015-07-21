@@ -12,13 +12,13 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by alex on 17.07.15.
+ * Created by alex on 13.07.15.
  */
-public class RequestMeAdapter extends BaseAdapter {
+public class RequestAdapter extends BaseAdapter {
     private List<Request> list;
     private LayoutInflater inflater;
 
-    public RequestMeAdapter(Context context, List<Request> list) {
+    public RequestAdapter(Context context, List<Request> list) {
         this.list = list;
         inflater=(LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
 
@@ -40,33 +40,25 @@ public class RequestMeAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         View view=convertView;
         if(view ==null)
         {
-            view=inflater.inflate(R.layout.item_request_me,parent,false);
+            view=inflater.inflate(R.layout.item_dump,parent,false);
         }
 
-        TextView textView= (TextView) view.findViewById(R.id.requestsMeName);
+        TextView textView= (TextView) view.findViewById(R.id.textView);
         final Request request = getRequest(position);
-        final int i= position;
         textView.setText(request.getTeg());
-        Button button=(Button) view.findViewById(R.id.agree);
+        Button button=(Button) view.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(inflater.getContext(), Stream.class);
+                Intent intent=new Intent(inflater.getContext(),VideoPlayActivity.class);
+                intent.putExtra("TAG", request.getTeg());
+                intent.putExtra("URI", request.getUri());
                 inflater.getContext().startActivity(intent);
             }
         });
-        button = (Button) view.findViewById(R.id.unsubscribe);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                list.remove(i);
-                notifyDataSetChanged();
-            }
-        });
-
-
         return view;
     }
     private Request getRequest(int position)
@@ -74,4 +66,3 @@ public class RequestMeAdapter extends BaseAdapter {
         return (Request) getItem(position);
     }
 }
-
