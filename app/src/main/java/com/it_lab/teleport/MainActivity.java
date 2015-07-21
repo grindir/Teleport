@@ -26,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         listView=(ListView) findViewById(R.id.listView);
-        DumpAdapter adapter=new DumpAdapter(this,initData());
+        RequestAdapter adapter=new RequestAdapter(this,initData());
         listView.setAdapter(adapter);
 
     }
