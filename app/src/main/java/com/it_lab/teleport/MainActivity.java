@@ -18,6 +18,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     ListView listView;
+    ListView listView2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -25,8 +26,12 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         listView=(ListView) findViewById(R.id.listView);
-        RequestAdapter adapter=new RequestAdapter(this,initData());
+        RequestAdapter adapter=new RequestAdapter(this,initData(),R.layout.item_my_reguest);
         listView.setAdapter(adapter);
+
+        listView2=(ListView) findViewById(R.id.listView2);
+        RequestAdapter adapter2=new RequestAdapter(this,initData2(),R.layout.item_request_me);
+        listView2.setAdapter(adapter2);
 
         createTab();
 
@@ -41,8 +46,29 @@ public class MainActivity extends ActionBarActivity {
     private List<Request> initData()
     {
         List<Request> list=new ArrayList<>();
+        list.add(new Request("","begin"));
         list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
         list.add(new Request("#тестовыйпоток", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"));
+        list.add(new Request("","next"));
+        list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
+        list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
+        list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
+
+
+        return list;
+    }
+
+    private List<Request> initData2()
+    {
+        List<Request> list=new ArrayList<>();
+        list.add(new Request("","begin"));
+        list.add(new Request("#demoDay", ""));
+        list.add(new Request("#тестовыйпоток", ""));
+        list.add(new Request("","next"));
+        list.add(new Request("#demoDay", ""));
+        list.add(new Request("#Птичка", ""));
+        list.add(new Request("#Речка", ""));
+
 
         return list;
     }
