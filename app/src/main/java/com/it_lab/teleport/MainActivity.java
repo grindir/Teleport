@@ -26,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         listView=(ListView) findViewById(R.id.listView);
-        RequestAdapter adapter=new RequestAdapter(this,initData());
+        RequestAdapter adapter=new RequestAdapter(this,initData(),R.layout.item_request_me);
         listView.setAdapter(adapter);
 
     }
@@ -40,22 +40,17 @@ public class MainActivity extends ActionBarActivity {
     private List<Request> initData()
     {
         List<Request> list=new ArrayList<>();
+        list.add(new Request("","begin"));
         list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
         list.add(new Request("#тестовыйпоток", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"));
+        list.add(new Request("","next"));
+        list.add(new Request("#asdsgf", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"));
+        list.add(new Request("#dfgzxcv", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"));
 
         return list;
     }
 
-    public void openRequestMe(View view)
-    {
-        Intent intent=new Intent(this,RequestMeActivity.class);
-        startActivity(intent);
-    }
-    public void openMyRequest(View view)
-    {
-        Intent intent=new Intent(this,MyRequestActivity.class);
-        startActivity(intent);
-    }
+
 
     public void startStream(View view)
     {
