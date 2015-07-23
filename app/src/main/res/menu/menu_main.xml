@@ -13,6 +13,12 @@
         android:title="добавить запрос"
         android:orderInCategory="100"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_login"
+        android:title="@string/LoginInMenu"
+        android:orderInCategory="100"
+        android:onClick="clickBtInMenuForLogin"
+        app:showAsAction="always" />
 
 </menu>
 

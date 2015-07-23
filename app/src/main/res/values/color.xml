@@ -5,5 +5,7 @@
     <color name="colorPrimaryDark">#1976d2</color>
     <color name="colorAccent">#f44336</color>
     <color name="textColorPrimary">#ffffff</color>
+    <color name="Error">#ff0000</color>
+    <color name="Ok">#00ff55</color>
 
 </resources>

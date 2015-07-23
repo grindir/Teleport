@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.provider.Contacts;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -133,6 +135,11 @@ public class MainActivity extends ActionBarActivity {
         tabs.addTab(spec);
 
         tabs.setCurrentTab(0);
+    }
+
+    public void clickBtInMenuForLogin(View view){
+        Intent intentLogin = new Intent(this,Login.class);
+        startActivity(intentLogin);
     }
 
 

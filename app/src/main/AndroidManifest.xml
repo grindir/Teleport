@@ -38,12 +38,14 @@
             android:label="@string/title_activity_stream"
             android:screenOrientation="landscape" >
         </activity>
-
-
         <activity
             android:name=".AddRequestActivity"
             android:label="@string/title_activity_add_request"
-            android:parentActivityName="com.it_lab.teleport.AddRequestActivity">
+            android:parentActivityName=".AddRequestActivity" >
+        </activity>
+        <activity
+            android:name=".Login"
+            android:label="@string/title_activity_login" >
         </activity>
     </application>
 
