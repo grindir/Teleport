@@ -1,33 +1,37 @@
 package com.it_lab.teleport;
 
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends Activity implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
+public class MainActivity extends ActionBarActivity {
 
 
     ListView listView;
     ListView listView2;
-    TabHost tabs;
-    ViewPager pager;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toolbar = (Toolbar) findViewById(R.id.appbarMain);
+        setSupportActionBar(toolbar);
 
         listView=(ListView) findViewById(R.id.listView);
         RequestAdapter adapter=new RequestAdapter(this,initData(),R.layout.item_my_reguest);
@@ -37,13 +41,7 @@ public class MainActivity extends Activity implements TabHost.OnTabChangeListene
         RequestAdapter adapter2=new RequestAdapter(this,initData2(),R.layout.item_request_me);
         listView2.setAdapter(adapter2);
 
-        pager = (ViewPager) findViewById(R.id.pager);
-
         createTab();
-
-        pager.setAdapter(new MyPagerAdapter(this));
-        pager.setOnPageChangeListener(this);
-        tabs.setOnTabChangedListener(this);
 
     }
 
@@ -53,15 +51,40 @@ public class MainActivity extends Activity implements TabHost.OnTabChangeListene
         return true;
     }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+
+        switch (item.getItemId())
+        {
+            case R.id.action_settings :
+                Toast.makeText(getApplicationContext(), "Setting Pressed", Toast.LENGTH_LONG).show();
+                break;
+            case  R.id.action_go:
+                Intent intent =new Intent(this,AddRequestActivity.class);
+                startActivity(intent);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private List<Request> initData()
     {
+        Intent intent=getIntent();
         List<Request> list=new ArrayList<>();
-        list.add(new Request("","begin"));
+
+        list.add(new Request("", "begin"));
+
+        if(intent.getAction().equals("addMyRequest"))
+            list.add(new Request(intent.getStringExtra("TAG"),""));
+
+
+
         list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
         list.add(new Request("#тестовыйпоток", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"));
-        list.add(new Request("", "next"));
+        list.add(new Request("","next"));
         list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
-        list.add(new Request("#тестовыйпоток", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"));
+        list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
         list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
 
 
@@ -92,9 +115,9 @@ public class MainActivity extends Activity implements TabHost.OnTabChangeListene
     }
 
     //ПРОВЕРЕН
-    public void createTab(){
+    private void createTab(){
 
-        tabs = (TabHost) findViewById(R.id.tabHost);
+        TabHost tabs = (TabHost) findViewById(R.id.tabHost);
 
         tabs.setup();
 
@@ -110,32 +133,6 @@ public class MainActivity extends Activity implements TabHost.OnTabChangeListene
         tabs.addTab(spec);
 
         tabs.setCurrentTab(0);
-    }
-
-    @Override
-    public void onTabChanged(String tabId){
-        int pageNumber = 0;
-        if(tabId.equals("tab1")){
-            pageNumber = 0;
-        } else{
-            pageNumber = 1;
-        }
-        pager.setCurrentItem(pageNumber);
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int pageNumber) {
-        tabs.setCurrentTab(pageNumber);
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
     }
 
 

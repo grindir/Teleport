@@ -91,29 +91,31 @@ public class RequestAdapter extends BaseAdapter {
                      else
                         textView.setText(request.getTeg());
 
-
-                button.setOnClickListener(new View.OnClickListener() {
-
-                    public void onClick(View v) {
-                        remove(position);
-                    }
-                });
                 if(flagDump)
-                    button.setVisibility(View.VISIBLE);
+                    button.setVisibility(View.INVISIBLE);
+                else
+                    button.setOnClickListener(new View.OnClickListener() {
 
+                        public void onClick(View v) {
+                            remove(position);
+                        }
+                    });
 
 
                 button=(Button) view.findViewById(R.id.wathc);
+                button.setVisibility(View.VISIBLE);
+                if(!flagDump& request.uri.equals(""))
+                    button.setEnabled(false);
+                else
+                    button.setEnabled(true);
+
                 button.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View v) {
-                        jump(VideoPlayActivity.class, request);
+
+                            jump(VideoPlayActivity.class, request);
                     }
                 });
-                if(!flagDump)
-                    button.setVisibility(View.INVISIBLE);
-                else
-                    button.setVisibility(View.VISIBLE);
 
 
 

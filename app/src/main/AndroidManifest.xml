@@ -29,7 +29,6 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
         <activity
             android:name=".VideoPlayActivity"
             android:label="@string/title_activity_video_play" >
@@ -38,6 +37,13 @@
             android:name=".Stream"
             android:label="@string/title_activity_stream"
             android:screenOrientation="landscape" >
+        </activity>
+
+
+        <activity
+            android:name=".AddRequestActivity"
+            android:label="@string/title_activity_add_request"
+            android:parentActivityName="com.it_lab.teleport.AddRequestActivity">
         </activity>
     </application>
 

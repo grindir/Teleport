@@ -1,29 +1,26 @@
 package com.it_lab.teleport;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 
-import android.os.Bundle;
-import android.view.Menu;
+        import java.util.regex.Matcher;
+        import java.util.regex.Pattern;
 
-import android.view.SurfaceHolder;
-import android.view.Window;
-import android.view.WindowManager;
-
-import net.majorkernelpanic.streaming.Session;
-import net.majorkernelpanic.streaming.SessionBuilder;
-import net.majorkernelpanic.streaming.audio.AudioQuality;
-import net.majorkernelpanic.streaming.gl.SurfaceView;
-import net.majorkernelpanic.streaming.rtsp.RtspClient;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+        import net.majorkernelpanic.streaming.Session;
+        import net.majorkernelpanic.streaming.SessionBuilder;
+        import net.majorkernelpanic.streaming.audio.AudioQuality;
+        import net.majorkernelpanic.streaming.gl.SurfaceView;
+        import net.majorkernelpanic.streaming.rtsp.RtspClient;
+        import net.majorkernelpanic.streaming.video.VideoQuality;
+        import android.app.Activity;
+        import android.app.AlertDialog;
+        import android.content.DialogInterface;
+        import android.os.Bundle;
+        import android.view.Menu;
+        import android.view.SurfaceHolder;
+        import android.view.Window;
+        import android.view.WindowManager;
 
 public class Stream extends Activity implements RtspClient.Callback,
         Session.Callback, SurfaceHolder.Callback {
-
     // log tag
     public final static String TAG = Stream.class.getSimpleName();
 
@@ -71,8 +68,9 @@ public class Stream extends Activity implements RtspClient.Callback,
         mSession = SessionBuilder.getInstance()
                 .setContext(getApplicationContext())
                 .setAudioEncoder(SessionBuilder.AUDIO_NONE)
-//                .setAudioQuality(new AudioQuality(8000, 16000))
+                .setAudioQuality(new AudioQuality(8000, 16000))
                 .setVideoEncoder(SessionBuilder.VIDEO_H264)
+                .setVideoQuality(new VideoQuality(640, 480, 30, 500000))
                 .setSurfaceView(mSurfaceView).setPreviewOrientation(0)
                 .setCallback(this).build();
 
@@ -92,7 +90,7 @@ public class Stream extends Activity implements RtspClient.Callback,
         path = m.group(3);
 
         mClient.setCredentials(AppConfig.PUBLISHER_USERNAME,
-               AppConfig.PUBLISHER_PASSWORD);
+                AppConfig.PUBLISHER_PASSWORD);
         mClient.setServerAddress(ip, Integer.parseInt(port));
         mClient.setStreamPath("/" + path);
     }
@@ -124,7 +122,7 @@ public class Stream extends Activity implements RtspClient.Callback,
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_stream, menu);
         return true;
     }
 

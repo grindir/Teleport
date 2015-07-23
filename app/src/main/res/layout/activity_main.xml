@@ -1,11 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_height="match_parent"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:paddingBottom="0dp"
+    tools:context=".MainActivity"
     android:weightSum="1">
+
+    <include
+        android:id="@+id/appbarMain"
+        layout="@layout/app_bar" />
+
 
     <TabHost
         android:layout_width="match_parent"
@@ -48,7 +55,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:layout_gravity="center_horizontal"
-                        android:layout_weight="0.95" />
+                        android:layout_weight="0.95"
+                        android:layout_margin="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -67,7 +75,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:layout_gravity="center_horizontal"
-                        android:layout_weight="0.95" />
+                        android:layout_weight="0.95"
+                        android:layout_margin="10dp" />
                 </LinearLayout>
 
             </FrameLayout>
@@ -85,13 +94,12 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.95"
             android:onClick="startStream"
-            android:text="@string/ButtonStream"
+            android:text="Показать"
             android:id="@+id/startStream" />
-
     </LinearLayout>
 
 </LinearLayout>
