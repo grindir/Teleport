@@ -16,7 +16,7 @@ import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
 
-public class VideoPlayActivity extends ActionBarActivity {
+public class VideoPlayActivity extends Activity {
 
     private VideoView videoView;
     private String uri;
