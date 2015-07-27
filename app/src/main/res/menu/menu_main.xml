@@ -17,8 +17,7 @@
         android:id="@+id/action_login"
         android:title="@string/LoginInMenu"
         android:orderInCategory="100"
-        android:onClick="clickBtInMenuForLogin"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 
 </menu>
 

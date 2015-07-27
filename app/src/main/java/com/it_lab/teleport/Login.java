@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class Login extends Activity {
 
-    String emailS, passwordS;
+    String emailS;
     EditText emailViev, passViev;
     Editable emailE, passwordE;
     TextView textView;
@@ -26,7 +26,6 @@ public class Login extends Activity {
         textView = (TextView) findViewById(R.id.textView4);
         emailE = emailViev.getText();
         passwordE = passViev.getText();
-        work();
     }
 
     @Override
@@ -51,6 +50,9 @@ public class Login extends Activity {
         return super.onOptionsItemSelected(item);
     }
     void work(){
+    }
+
+    public void clickLogin(View view){
         testing();
     }
 
@@ -69,12 +71,36 @@ public class Login extends Activity {
                 textView.setVisibility(View.VISIBLE);
                 textView.setTextColor(getResources().getColor(R.color.Error));
                 textView.setText(R.string.PassNull);
-        } else {
+        } else
+            if (emailTest()) {
                 textView.setVisibility(View.VISIBLE);
                 textView.setTextColor(getResources().getColor(R.color.Ok));
-                textView.setText(R.string.PassNull);
+                textView.setText("Ok");
+            } else {
+                textView.setVisibility(View.VISIBLE);
+                textView.setTextColor(getResources().getColor(R.color.Error));
+                textView.setText("Неверно введен Email");
             }
 
+
+
+
+    }
+
+    boolean emailTest(){
+        int k=0;
+        emailS = emailE.toString();
+        for(int i=0;i<emailS.length();i=i+1){
+            if (k==2) k = 3;
+            if (emailS.charAt(i) == '@'){
+                k=1;
+            }
+            if (k==1 && emailS.charAt(i)=='.'){
+                k=2;
+            }
+        }
+        if (k==3) return true;
+        else return false;
 
     }
 }

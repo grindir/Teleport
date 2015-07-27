@@ -31,9 +31,11 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".VideoPlayActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_video_play" >
         </activity>
         <activity
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:name=".Stream"
             android:label="@string/title_activity_stream"
             android:screenOrientation="landscape" >

@@ -65,6 +65,11 @@ public class MainActivity extends ActionBarActivity {
                 Intent intent =new Intent(this,AddRequestActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.action_login:
+                Intent intentLogin =new Intent(this,Login.class);
+                startActivity(intentLogin);
+                break;
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -137,10 +142,6 @@ public class MainActivity extends ActionBarActivity {
         tabs.setCurrentTab(0);
     }
 
-    public void clickBtInMenuForLogin(View view){
-        Intent intentLogin = new Intent(this,Login.class);
-        startActivity(intentLogin);
-    }
 
 
 }
