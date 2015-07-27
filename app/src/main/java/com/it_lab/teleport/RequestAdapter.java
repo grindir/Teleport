@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -51,7 +52,7 @@ public class RequestAdapter extends BaseAdapter {
         View view=convertView;
         final Request request = getRequest(position);
         TextView textView;
-        Button button;
+        ImageButton button;
 
 
 
@@ -67,12 +68,12 @@ public class RequestAdapter extends BaseAdapter {
 
 
                 textView= (TextView) view.findViewById(R.id.myRequestName);
-                button=(Button) view.findViewById(R.id.delete);
+                button=(ImageButton) view.findViewById(R.id.delete);
 
                 if(request.uri.equals("begin")) {
                     textView.setText("Мои запросы");
                     button.setVisibility(View.INVISIBLE);
-                    button=(Button) view.findViewById(R.id.wathc);
+                    button=(ImageButton) view.findViewById(R.id.wathc);
                     button.setVisibility(View.INVISIBLE);
                     flagDump=false;
                     return  view;
@@ -83,7 +84,7 @@ public class RequestAdapter extends BaseAdapter {
                     {
                         textView.setText("Свалка");
                         button.setVisibility(View.INVISIBLE);
-                        button=(Button) view.findViewById(R.id.wathc);
+                        button=(ImageButton) view.findViewById(R.id.wathc);
                         button.setVisibility(View.INVISIBLE);
                         flagDump=true;
                         return  view;
@@ -102,7 +103,7 @@ public class RequestAdapter extends BaseAdapter {
                     });
 
 
-                button=(Button) view.findViewById(R.id.wathc);
+                button=(ImageButton) view.findViewById(R.id.wathc);
                 button.setVisibility(View.VISIBLE);
                 if(!flagDump& request.uri.equals(""))
                     button.setEnabled(false);
@@ -127,13 +128,13 @@ public class RequestAdapter extends BaseAdapter {
             case R.layout.item_request_me:
 
                 textView= (TextView) view.findViewById(R.id.requestsMeName);
-                button=(Button) view.findViewById(R.id.unsubscribe);
+                button=(ImageButton) view.findViewById(R.id.unsubscribe);
 
 
                 if(request.uri.equals("begin")) {
                     textView.setText("Запросы мне");
                     button.setVisibility(View.INVISIBLE);
-                    button=(Button) view.findViewById(R.id.agree);
+                    button=(ImageButton) view.findViewById(R.id.agree);
                     button.setVisibility(View.INVISIBLE);
                     flagDump=false;
                     return  view;
@@ -144,7 +145,7 @@ public class RequestAdapter extends BaseAdapter {
                 {
                     textView.setText("Свалка");
                     button.setVisibility(View.INVISIBLE);
-                    button=(Button) view.findViewById(R.id.agree);
+                    button=(ImageButton) view.findViewById(R.id.agree);
                     button.setVisibility(View.INVISIBLE);
                     flagDump=true;
                     return  view;
@@ -163,7 +164,7 @@ public class RequestAdapter extends BaseAdapter {
                 });
 
 
-                button=(Button) view.findViewById(R.id.agree);
+                button=(ImageButton) view.findViewById(R.id.agree);
                 button.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View v) {

@@ -31,6 +31,8 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".VideoPlayActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:parentActivityName="com.it_lab.teleport.VideoPlayActivity"
             android:label="@string/title_activity_video_play" >
         </activity>
         <activity

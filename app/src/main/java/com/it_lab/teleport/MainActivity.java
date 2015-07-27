@@ -3,8 +3,11 @@ package com.it_lab.teleport;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -22,24 +25,22 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
 
-    ListView listView;
-    ListView listView2;
+
+
+
     Toolbar toolbar;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         toolbar = (Toolbar) findViewById(R.id.appbarMain);
         setSupportActionBar(toolbar);
-
-        listView=(ListView) findViewById(R.id.listView);
-        RequestAdapter adapter=new RequestAdapter(this,initData(),R.layout.item_my_reguest);
-        listView.setAdapter(adapter);
-
-        listView2=(ListView) findViewById(R.id.listView2);
-        RequestAdapter adapter2=new RequestAdapter(this,initData2(),R.layout.item_request_me);
-        listView2.setAdapter(adapter2);
 
         createTab();
 
@@ -66,46 +67,8 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+
     }
-
-    private List<Request> initData()
-    {
-        Intent intent=getIntent();
-        List<Request> list=new ArrayList<>();
-
-        list.add(new Request("", "begin"));
-
-        if(intent.getAction().equals("addMyRequest"))
-            list.add(new Request(intent.getStringExtra("TAG"),""));
-
-
-
-        list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
-        list.add(new Request("#тестовыйпоток", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"));
-        list.add(new Request("","next"));
-        list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
-        list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
-        list.add(new Request("#demoDay", "http://192.168.0.210:80/myapp/mystream"));
-
-
-        return list;
-    }
-
-    private List<Request> initData2()
-    {
-        List<Request> list=new ArrayList<>();
-        list.add(new Request("","begin"));
-        list.add(new Request("#demoDay", ""));
-        list.add(new Request("#тестовыйпоток", ""));
-        list.add(new Request("","next"));
-        list.add(new Request("#demoDay", ""));
-        list.add(new Request("#Птичка", ""));
-        list.add(new Request("#Речка", ""));
-
-
-        return list;
-    }
-
 
 
     public void startStream(View view)
