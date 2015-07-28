@@ -5,14 +5,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.androidquery.AQuery;
+import com.androidquery.callback.AjaxCallback;
+import com.androidquery.callback.AjaxStatus;
+import com.androidquery.util.AQUtility;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by alex on 27.07.15.
@@ -21,7 +31,8 @@ public class MyRequestFragment extends Fragment {
     ListView listView;
     List<Request> myRequest;
     SharedPreferences sharedPreferences;
-
+    AQuery aQuery;
+    RequestAdapter adapter;
 
     @Override
     public void onPause() {
@@ -35,16 +46,31 @@ public class MyRequestFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_request_fragment, container, false);
         sharedPreferences=inflater.getContext().getSharedPreferences("SaveMyRequest", Context.MODE_PRIVATE);
         myRequest=new ArrayList<>();
+        aQuery=new AQuery(getActivity());
         listView = (ListView) view.findViewById(R.id.listView);
         initData(getActivity().getIntent());
-        RequestAdapter adapter = new RequestAdapter(inflater.getContext(), myRequest, R.layout.item_my_reguest);
+        adapter = new RequestAdapter(inflater.getContext(), myRequest, R.layout.item_my_reguest);
         listView.setAdapter(adapter);
+        String url = "http://192.168.0.238:8080";
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("q", "androidquery");
+
+        aQuery.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>() {
+
+            @Override
+            public void callback(String url, JSONObject json, AjaxStatus status) {
+
+                Toast.makeText(aQuery.getContext(), "отправлен", Toast.LENGTH_LONG).show();
+            }
+        });
+
 
         return view;
 
@@ -59,11 +85,12 @@ public class MyRequestFragment extends Fragment {
 //       myRequest.add(new Request("", "next"));
 //       myRequest.add(new Request("DemoDay", "rtsp://s-projects.ru:1935/live/android_test"));
 //       myRequest.add(new Request("DemoDay", "url"));
-        Request.getSaveList(sharedPreferences,myRequest);
+        Request.getSaveList(sharedPreferences, myRequest);
         if(intent.getAction().equals("addMyRequest"))
         {
             myRequest.add(1,new Request(intent.getSerializableExtra("TAG").toString(),""));
         }
+
 
 
 
