@@ -49,9 +49,14 @@ public class Request {
 
             }
         }
-
-
     }
+    static public void cleanList(List<Request> list)
+    {
+        list.clear();
+        list.add(new Request("","begin"));
+    }
+
+
 
     static public void saveList(SharedPreferences mSettings , List<Request> list) {
 

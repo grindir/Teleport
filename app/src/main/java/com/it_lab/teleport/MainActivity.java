@@ -1,48 +1,44 @@
 package com.it_lab.teleport;
 
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.Context;
+
 import android.content.Intent;
 
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TabHost;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.androidquery.AQuery;
+import com.androidquery.callback.AjaxCallback;
+import com.androidquery.callback.AjaxStatus;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class MainActivity extends ActionBarActivity {
 
-
-
-
-
     Toolbar toolbar;
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         toolbar = (Toolbar) findViewById(R.id.appbarMain);
         setSupportActionBar(toolbar);
 
         createTab();
+
+
 
     }
 
@@ -71,10 +67,19 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+
+
+
+
+
+
+
     public void startStream(View view)
     {
-        Intent intent=new Intent(this,Stream.class);
-        startActivity(intent);
+//        Intent intent=new Intent(this,Stream.class);
+//        startActivity(intent)
+
+
     }
 
     //ПРОВЕРЕН

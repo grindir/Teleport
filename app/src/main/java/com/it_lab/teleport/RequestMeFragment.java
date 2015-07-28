@@ -2,10 +2,8 @@ package com.it_lab.teleport;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +33,7 @@ public class RequestMeFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.request_me_fragment, container, false);
@@ -60,7 +58,7 @@ public class RequestMeFragment extends Fragment {
 //        requestMe.add(new Request("#demoDay", ""));
 //        requestMe.add(new Request("#Птичка", ""));
 //        requestMe.add(new Request("#Речка", ""));
-        Request.getSaveList(sharedPreferences, requestMe);
+       Request.getSaveList(sharedPreferences, requestMe);
 
 
 
