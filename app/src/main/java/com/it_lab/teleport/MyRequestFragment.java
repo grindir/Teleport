@@ -57,12 +57,29 @@ public class MyRequestFragment extends Fragment {
         initData(getActivity().getIntent());
         adapter = new RequestAdapter(inflater.getContext(), myRequest, R.layout.item_my_reguest);
         listView.setAdapter(adapter);
+        update();
+
+
+
+
+
+
+        return view;
+
+    }
+
+
+    private void update()
+    {
         String url = "http://192.168.0.238:8080";
+        JSONObject input = new JSONObject();
+        try {
+            input.put("hello", "world");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("q", "androidquery");
-
-        aQuery.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>() {
+        aQuery.post(url, input, JSONObject.class, new AjaxCallback<JSONObject>() {
 
             @Override
             public void callback(String url, JSONObject json, AjaxStatus status) {
@@ -70,12 +87,7 @@ public class MyRequestFragment extends Fragment {
                 Toast.makeText(aQuery.getContext(), "отправлен", Toast.LENGTH_LONG).show();
             }
         });
-
-
-        return view;
-
     }
-
 
     private void initData(Intent intent) {
 
