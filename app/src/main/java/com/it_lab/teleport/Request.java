@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -12,8 +16,8 @@ import java.util.List;
  */
 public class Request {
 
-    public String teg;
-    public String uri;
+    private String teg;
+    private String uri;
 
     public String getTeg() {
         return teg;
@@ -53,10 +57,23 @@ public class Request {
     static public void cleanList(List<Request> list)
     {
         list.clear();
-        list.add(new Request("","begin"));
+        list.add(new Request("", "begin"));
     }
 
+    public JSONObject getJOSON()
+    {
+        JSONObject json=new JSONObject();
+        try {
+            json.put("TEG", teg);
+            json.put("URI", uri);
+        }
+        catch (JSONException e) {
+                e.printStackTrace();
+        }
 
+        return json;
+
+        }
 
     static public void saveList(SharedPreferences mSettings , List<Request> list) {
 

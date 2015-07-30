@@ -70,7 +70,7 @@ public class RequestAdapter extends BaseAdapter {
                 textView= (TextView) view.findViewById(R.id.myRequestName);
                 button=(ImageButton) view.findViewById(R.id.delete);
 
-                if(request.uri.equals("begin")) {
+                if(request.getUri().equals("begin")) {
                     textView.setText("Мои запросы");
                     button.setVisibility(View.INVISIBLE);
                     button=(ImageButton) view.findViewById(R.id.wathc);
@@ -80,7 +80,7 @@ public class RequestAdapter extends BaseAdapter {
 
                 }
                 else
-                    if(request.uri.equals("next"))
+                    if(request.getUri().equals("next"))
                     {
                         textView.setText("Свалка");
                         button.setVisibility(View.INVISIBLE);
@@ -105,7 +105,7 @@ public class RequestAdapter extends BaseAdapter {
 
                 button=(ImageButton) view.findViewById(R.id.wathc);
                 button.setVisibility(View.VISIBLE);
-                if(!flagDump& request.uri.equals(""))
+                if(!flagDump& request.getUri().equals(""))
                     button.setEnabled(false);
                 else
                     button.setEnabled(true);
@@ -131,7 +131,7 @@ public class RequestAdapter extends BaseAdapter {
                 button=(ImageButton) view.findViewById(R.id.unsubscribe);
 
 
-                if(request.uri.equals("begin")) {
+                if(request.getUri().equals("begin")) {
                     textView.setText("Запросы мне");
                     button.setVisibility(View.INVISIBLE);
                     button=(ImageButton) view.findViewById(R.id.agree);
@@ -141,7 +141,7 @@ public class RequestAdapter extends BaseAdapter {
 
                 }
                 else
-                if(request.uri.equals("next"))
+                if(request.getUri().equals("next"))
                 {
                     textView.setText("Свалка");
                     button.setVisibility(View.INVISIBLE);
