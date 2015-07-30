@@ -6,7 +6,7 @@
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     android:paddingBottom="0dp"
-    tools:context="com.it_lab.teleport.Login">
+    tools:context="com.it_lab.teleport.Registration">
 
     <include
         android:id="@+id/appbarMain"
@@ -55,31 +55,39 @@
         android:layout_height="wrap_content"
         android:text="@string/ButtonLoginText"
         android:id="@+id/button"
-        android:layout_marginTop="82dp"
-        android:layout_below="@+id/editTextR2"
-        android:onClick="clickLogin"
+        android:layout_marginTop="40dp"
+        android:onClick="clickRegist"
+        android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text=""
         android:id="@+id/textView4"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="34dp"
         android:visibility="invisible"
-        android:layout_below="@+id/editTextR2"
+        android:layout_below="@+id/editTextR3"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/Regist"
-        android:id="@+id/textView5"
-        android:clickable="true"
-        android:onClick="goToRegist"
-        android:layout_alignParentBottom="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/PasswordText2"
+        android:id="@+id/textView6"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/editTextR2"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editTextR3"
+        android:layout_below="@+id/textView6"
+        android:layout_alignRight="@+id/textView6"
+        android:layout_alignEnd="@+id/textView6" />
 
 </RelativeLayout>

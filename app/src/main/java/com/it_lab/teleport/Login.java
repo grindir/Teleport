@@ -1,7 +1,7 @@
 package com.it_lab.teleport;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.Menu;
@@ -21,8 +21,8 @@ public class Login extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        emailViev = (EditText) findViewById(R.id.editText2);
-        passViev = (EditText) findViewById(R.id.editText3);
+        emailViev = (EditText) findViewById(R.id.editTextR1);
+        passViev = (EditText) findViewById(R.id.editTextR2);
         textView = (TextView) findViewById(R.id.textView4);
         emailE = emailViev.getText();
         passwordE = passViev.getText();
@@ -56,7 +56,7 @@ public class Login extends Activity {
         testing();
     }
 
-    public void testing() {
+    private void testing() {
         if(emailE.length()==0 && passwordE.length()==0){
             textView.setVisibility(View.VISIBLE);
             textView.setTextColor(getResources().getColor(R.color.Error));
@@ -72,7 +72,7 @@ public class Login extends Activity {
                 textView.setTextColor(getResources().getColor(R.color.Error));
                 textView.setText(R.string.PassNull);
         } else
-            if (emailTest()) {
+            if (emailTest(emailE)) {
                 textView.setVisibility(View.VISIBLE);
                 textView.setTextColor(getResources().getColor(R.color.Ok));
                 textView.setText("Ok");
@@ -87,20 +87,25 @@ public class Login extends Activity {
 
     }
 
-    boolean emailTest(){
+    public boolean emailTest(Editable editable){
         int k=0;
-        emailS = emailE.toString();
-        for(int i=0;i<emailS.length();i=i+1){
+        String string = editable.toString();
+        for(int i=0;i<string.length();i=i+1){
             if (k==2) k = 3;
-            if (emailS.charAt(i) == '@'){
+            if (string.charAt(i) == '@'){
                 k=1;
             }
-            if (k==1 && emailS.charAt(i)=='.'){
+            if (k==1 && string.charAt(i)=='.'){
                 k=2;
             }
         }
         if (k==3) return true;
         else return false;
 
+    }
+
+    public void goToRegist(){
+        Intent intentRegist =new Intent(this,Registration.class);
+        startActivity(intentRegist);
     }
 }

@@ -57,7 +57,7 @@ public class MyRequestFragment extends Fragment {
         initData(getActivity().getIntent());
         adapter = new RequestAdapter(inflater.getContext(), myRequest, R.layout.item_my_reguest);
         listView.setAdapter(adapter);
-        String url = "http://192.168.0.238:8080";
+        String url = "http://192.168.0.240:8080";
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("q", "androidquery");

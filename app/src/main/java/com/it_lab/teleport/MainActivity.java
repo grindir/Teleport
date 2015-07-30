@@ -15,12 +15,9 @@ import android.widget.TabHost;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
-import com.androidquery.AQuery;
-import com.androidquery.callback.AjaxCallback;
-import com.androidquery.callback.AjaxStatus;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+
+
 
 
 public class MainActivity extends ActionBarActivity {
@@ -74,13 +71,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-
-
-
-
-
-
-
     public void startStream(View view)
     {
 //        Intent intent=new Intent(this,Stream.class);
@@ -109,7 +99,6 @@ public class MainActivity extends ActionBarActivity {
 
         tabs.setCurrentTab(0);
     }
-
 
 
 }

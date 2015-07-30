@@ -19,5 +19,9 @@
     <string name="EmailNull">Введите Email</string>
     <string name="PassNull">Введите пароль</string>
     <string name="LoginInMenu">Авторизоваться</string>
+    <string name="title_activity_registration">Registration</string>
+    <string name="Regist">Пройти регистрацию</string>
+    <string name="PasswordText2">Введите пароль повторно</string>
+    <string name="EmailError">Неверно введен Email</string>
 
 </resources>
