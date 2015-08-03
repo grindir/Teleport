@@ -17,14 +17,14 @@ import java.util.List;
  */
 public class RequestMeFragment extends Fragment {
     ListView listView;
-    List<Request> requestMe;
+    RequestFactory requestMe;
     SharedPreferences sharedPreferences;
 
 
     @Override
     public void onPause() {
 
-        Request.saveList(sharedPreferences, requestMe);
+//        Request.saveList(sharedPreferences, requestMe);
         super.onPause();
     }
 
@@ -38,10 +38,11 @@ public class RequestMeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.request_me_fragment, container, false);
         sharedPreferences=inflater.getContext().getSharedPreferences("SaveRequestMe", Context.MODE_PRIVATE);
-        requestMe=new ArrayList<>();
+        requestMe=new RequestFactory(inflater.getContext(),"SaveRequestMe");
+        RequestAdapter adapter = new RequestAdapter(inflater.getContext(), requestMe, R.layout.item_request_me);
+
         listView = (ListView) view.findViewById(R.id.listView2);
         initData();
-        RequestAdapter adapter = new RequestAdapter(inflater.getContext(), requestMe, R.layout.item_request_me);
         listView.setAdapter(adapter);
 
         return view;
@@ -58,7 +59,7 @@ public class RequestMeFragment extends Fragment {
 //        requestMe.add(new Request("#demoDay", ""));
 //        requestMe.add(new Request("#Птичка", ""));
 //        requestMe.add(new Request("#Речка", ""));
-       Request.getSaveList(sharedPreferences, requestMe);
+       requestMe.getSaveList();
 
 
 
