@@ -24,14 +24,11 @@ public class Transformer {
         }
         return json;
     }
-    public static  List<Request> getList(JSONObject json)
+    public static  List<Request> getList(JSONArray array)
     {
-        JSONArray array = new JSONArray();
         List<Request> list =new ArrayList<>();
         Request request;
         try {
-            array = json.getJSONArray("ARRAY");
-
 
             for (int i = 0; i < array.length(); i++) {
 

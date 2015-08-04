@@ -116,7 +116,7 @@ public class RequestAdapter extends BaseAdapter {
 
                 button=(ImageButton) view.findViewById(R.id.wathc);
                 button.setVisibility(View.VISIBLE);
-                if(!flagDump& request.getUri().equals(""))
+                if(!flagDump& request.getUri().equals(" "))
                     button.setEnabled(false);
                 else
                     button.setEnabled(true);

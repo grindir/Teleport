@@ -5,17 +5,18 @@
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     android:paddingBottom="0dp"
-    android:orientation="vertical"
-    tools:context="com.it_lab.teleport.VideoPlayActivity">
 
-    <include
-        android:id="@+id/appbarVideo"
-        layout="@layout/app_bar" />
+    android:orientation="vertical"
+    tools:context="com.it_lab.teleport.VideoPlayActivity"
+    android:weightSum="1">
 
 
     <io.vov.vitamio.widget.VideoView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/videoView"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center"
+        android:clickable="false" />
+
+
 </LinearLayout>

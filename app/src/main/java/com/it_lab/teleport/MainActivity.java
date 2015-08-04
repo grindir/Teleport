@@ -5,41 +5,35 @@ package com.it_lab.teleport;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+
 import android.support.v7.app.ActionBarActivity;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TabHost;
-import android.support.v7.widget.Toolbar;
+
 import android.widget.Toast;
 
-import com.androidquery.AQuery;
-import com.androidquery.callback.AjaxCallback;
-import com.androidquery.callback.AjaxStatus;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
-public class MainActivity extends ActionBarActivity {
 
-    Toolbar toolbar;
+
+
+public class MainActivity extends ActionBarActivity implements SearchView.OnQueryTextListener {
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.appbarMain);
-        setSupportActionBar(toolbar);
 
         createTab();
-
-
-
     }
 
     @Override
@@ -66,18 +60,10 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-
-
-
-
-
-
-
-
     public void startStream(View view)
     {
-//        Intent intent=new Intent(this,Stream.class);
-//        startActivity(intent)
+        Intent intent=new Intent(this,Stream.class);
+        startActivity(intent);
 
 
     }
@@ -104,4 +90,13 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
 }

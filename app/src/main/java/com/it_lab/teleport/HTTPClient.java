@@ -6,6 +6,7 @@ import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by alex on 31.07.15.
  */
 public class HTTPClient {
-    String url = "http://192.168.0.249:8080";
+    String url = "http://192.168.0.238:8080";
     AQuery aQuery;
     RequestFactory factory;
     RequestAdapter adapter;
@@ -94,7 +95,13 @@ public class HTTPClient {
 
                 if(json!=null) {
                     factory.clean();
-                    factory.addAll(Transformer.getList(json));
+                    JSONArray array=new JSONArray();
+                    try {
+                         array=json.getJSONArray("ARRAY");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    factory.addAll(Transformer.getList(array));
                     adapter.notifyDataSetChanged();
 
                 }
