@@ -79,7 +79,7 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    //ПРОВЕРЕН
+    //РџР РћР’Р•Р Р•Рќ
     private void createTab(){
 
         TabHost tabs = (TabHost) findViewById(R.id.tabHost);
@@ -89,12 +89,12 @@ public class MainActivity extends ActionBarActivity {
         TabHost.TabSpec spec = tabs.newTabSpec("tag1");
 
         spec.setContent(R.id.tab1);
-        spec.setIndicator("Посмотреть");
+        spec.setIndicator("РџРѕСЃРјРѕС‚СЂРµС‚СЊ");
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("tag2");
         spec.setContent(R.id.tab2);
-        spec.setIndicator("Показать");
+        spec.setIndicator("РџРѕРєР°Р·Р°С‚СЊ");
         tabs.addTab(spec);
 
         tabs.setCurrentTab(0);

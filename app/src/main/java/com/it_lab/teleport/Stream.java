@@ -44,8 +44,8 @@ public class Stream extends Activity implements OnClickListener {
     private PowerManager.WakeLock mWakeLock;
 
     private String ffmpeg_link =
-            "/mnt/sdcard/stream.flv";
-//            "rtmp://192.168.0.210:1936/videochat/stream";
+//            "/mnt/sdcard/stream.flv";
+            "rtmp://192.168.0.210:1936/videochat/stream2";
 
     long startTime = 0;
     boolean recording = false;
