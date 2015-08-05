@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by alex on 13.07.15.
@@ -194,7 +195,9 @@ public class RequestAdapter extends BaseAdapter {
         return view;
     }
 
-
+    public void setData(RequestFactory factory) {
+        this.factory=factory;
+    }
 
     private void jump(@Nullable Class activity, Request request)
     {
@@ -206,9 +209,10 @@ public class RequestAdapter extends BaseAdapter {
     }
     private void remove(int id)
     {
+        client.remove(getRequest(id).getId());
         factory.remove(id);
         notifyDataSetChanged();
-        client.remove(id-1);
+
 
 
     }

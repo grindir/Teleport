@@ -51,7 +51,6 @@ public class AddRequestActivity extends ActionBarActivity {
                 Intent intent=new Intent(this,MainActivity.class);
                 intent.setAction("addMyRequest");
                 intent.putExtra("TAG", editText.getText().toString());
-                editText.setText("");
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 

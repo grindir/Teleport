@@ -16,7 +16,7 @@ import java.util.List;
  * Created by alex on 31.07.15.
  */
 public class HTTPClient {
-    String url = "http://192.168.0.238:8080";
+    String url = "http://192.168.0.240:8080";
     AQuery aQuery;
     RequestFactory factory;
     RequestAdapter adapter;
@@ -33,7 +33,7 @@ public class HTTPClient {
 
 
 
-    public void  remove(int id)
+    public void  remove(long id)
     {
         JSONObject json=new JSONObject();
         try {

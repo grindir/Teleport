@@ -18,6 +18,15 @@ public class Request {
 
     private String teg;
     private String uri;
+    private long id;
+    private String autor;
+
+    public Request(String teg, String uri, long id, String autor) {
+        this.teg = teg;
+        this.uri = uri;
+        this.id = id;
+        this.autor = autor;
+    }
 
     public String getTeg() {
         return teg;
@@ -35,13 +44,22 @@ public class Request {
         this.uri = uri;
     }
 
-    public Request(String teg, String uri) {
 
-        this.teg = teg;
-        this.uri = uri;
+    public long getId() {
+        return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
 
     public JSONObject getJOSON()
     {
@@ -49,6 +67,9 @@ public class Request {
         try {
             json.put("TAG", teg);
             json.put("URI", uri);
+            json.put("ID",id);
+            json.put("LOGIN",autor);
+
         }
         catch (JSONException e) {
                 e.printStackTrace();

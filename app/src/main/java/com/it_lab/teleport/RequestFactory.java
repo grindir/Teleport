@@ -3,6 +3,12 @@ package com.it_lab.teleport;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,26 +24,38 @@ public class RequestFactory {
     public RequestFactory(Context context,String nameSaveFile) {
 
         list = new ArrayList<>();
-        list.add(new Request("", "begin"));
+        list.add(new Request("", "begin",0,"system"));
         log=true;
         mSettings=context.getSharedPreferences(nameSaveFile, Context.MODE_PRIVATE);
     }
 
 
-
-    public void add(String tag,String uri)
+    public void add(Request request)
     {
         if(log)
         {
             log=false;
-            list.add(new Request("","next"));
+            list.add(new Request("","next",0,"system"));
         }
-        list.add(new Request(tag,uri));
+        list.add(request);
+    }
+    public void add(String tag,String uri,long id,String autor)
+    {
+        if(log)
+        {
+            log=false;
+            list.add(new Request("","next",0,"system"));
+        }
+        list.add(new Request(tag,uri,id,autor));
 
     }
 
-    public void addPersonal(String tag,String uri){
-        list.add(1, new Request(tag, uri));
+    public void addPersonal(Request request){
+        list.add(1, request);
+
+    }
+    public void addPersonal(String tag,String uri,long id,String autor){
+        list.add(1, new Request(tag, uri,id,autor));
 
     }
 
@@ -51,14 +69,22 @@ public class RequestFactory {
     }
 
     public void getSaveList() {
-        String str[];
+        JSONObject json;
+        JSONParser parser=new JSONParser();
+
         if (mSettings.contains("SIZE")) {
+            try {
             for (int i = 1; i < Integer.parseInt(mSettings.getString("SIZE", "")); i++) {
-                str = mSettings.getString("" + i, "").split(" ");
-                if (str.length < 2)
-                    list.add(new Request(str[0], ""));
-                else
-                    list.add(new Request(str[0], str[1]));
+
+                    json = (JSONObject) parser.parse(mSettings.getString("" + i, ""));
+                    list.add(Transformer.getRequest(json));
+
+                }
+
+
+            }catch (ParseException e) {
+                e.printStackTrace();
+
 
             }
         }
@@ -70,15 +96,25 @@ public class RequestFactory {
 
     public void addAll(List<Request> list)
     {
-        this.list.addAll(list);
+        for(Request request:list)
+        {
+            if(request.getAutor().equals(User.login))
+            {
+                addPersonal(request);
+            }
+            else
+                add(request);
+        }
+
 
     }
 
      public void clean()
     {
         list.clear();
-        list.add(new Request("", "begin"));
+        list.add(new Request("", "begin",0,"system"));
     }
+
 
      public void saveList() {
 
@@ -89,7 +125,7 @@ public class RequestFactory {
         Request request;
         for (int i = 1; i < list.size(); i++) {
             request = list.get(i);
-            editor.putString("" + i, request.getTeg() + " " + request.getUri());
+            editor.putString("" + i, request.getJOSON().toString());
         }
         editor.apply();
     }

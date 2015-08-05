@@ -15,6 +15,12 @@
         android:orderInCategory="100"
         app:showAsAction="always" />
 
+    <item android:id="@+id/search"
+        android:title="@android:string/search_go"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+
 
 
 
