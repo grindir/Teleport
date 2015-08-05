@@ -98,7 +98,10 @@ public class MyRequestFragment extends Fragment implements SearchView.OnQueryTex
         {
             request=myRequest.get(i);
             if(request.getTeg().equals(query))
-                factory.add(request.getTeg(),request.getUri(),request.getId(),request.getAutor());
+                if(request.getAutor().equals(User.login))
+                    factory.addPersonal(request);
+                else
+                    factory.add(request);
 
         }
         adapter.setData(factory);
