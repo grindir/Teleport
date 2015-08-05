@@ -67,7 +67,7 @@ public class MainActivity extends ActionBarActivity  {
 
     public void startStream(View view)
     {
-        Intent intent=new Intent(this,Stream.class);
+        Intent intent=new Intent(this,StreamSettings.class);
         startActivity(intent);
 
 

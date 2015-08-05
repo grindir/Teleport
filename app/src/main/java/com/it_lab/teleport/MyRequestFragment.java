@@ -91,13 +91,17 @@ public class MyRequestFragment extends Fragment implements SearchView.OnQueryTex
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+
+        if(query.equals(""))
+        {
+            return true;
+        }
         Request request;
         RequestFactory factory=new RequestFactory(getActivity(),"Save");
-
         for(int i=1;i<myRequest.size();i++)
         {
             request=myRequest.get(i);
-            if(request.getTeg().equals(query))
+            if(request.getTeg().toLowerCase().equals(query.toLowerCase()))
                 if(request.getAutor().equals(User.login))
                     factory.addPersonal(request);
                 else
@@ -111,6 +115,20 @@ public class MyRequestFragment extends Fragment implements SearchView.OnQueryTex
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        return false;
+        Request request;
+        RequestFactory factory=new RequestFactory(getActivity(),"Save");
+        for(int i=1;i<myRequest.size();i++)
+        {
+            request=myRequest.get(i);
+            if(request.getTeg().toLowerCase().contains(newText.toLowerCase())&&!(request.getUri().equals("next")))
+                if(request.getAutor().equals(User.login))
+                    factory.addPersonal(request);
+                else
+                    factory.add(request);
+
+        }
+        adapter.setData(factory);
+        adapter.notifyDataSetChanged();
+        return true;
     }
 }

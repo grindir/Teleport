@@ -23,5 +23,6 @@
     <string name="Regist">Пройти регистрацию</string>
     <string name="PasswordText2">Введите пароль повторно</string>
     <string name="EmailError">Неверно введен Email</string>
+    <string name="title_activity_stream_settings">StreamSettings</string>
 
 </resources>

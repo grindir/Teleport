@@ -16,7 +16,7 @@ import java.util.List;
  * Created by alex on 31.07.15.
  */
 public class HTTPClient {
-    String url = "http://192.168.0.240:8080";
+    static String url = "http://192.168.0.240:8080";
     AQuery aQuery;
     RequestFactory factory;
     RequestAdapter adapter;
@@ -27,6 +27,25 @@ public class HTTPClient {
         this.factory=factory;
         this.adapter=adapter;
 
+
+    }
+    public static void  PushStream(Context context,Request request){
+        AQuery aQuery=new AQuery(context);
+        JSONObject json=new JSONObject();
+        try {
+            json.put("REQUEST","PUSHSTREAM");
+            json.put("OBJECT",request.getJOSON());
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        aQuery.post(url, json, JSONObject.class, new AjaxCallback<JSONObject>() {
+
+            @Override
+            public void callback(String url, JSONObject json, AjaxStatus status) {
+            }});
 
     }
 
