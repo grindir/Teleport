@@ -74,9 +74,17 @@ public class Registration extends ActionBarActivity {
             textView.setText(R.string.PassNull);
         } else
         if (login.emailTest(emailE)) {
-            textView.setVisibility(View.VISIBLE);
-            textView.setTextColor(getResources().getColor(R.color.Ok));
-            textView.setText("Ok");
+            if (passwordE.equals(passwordE2)) {
+                //рср рейяр опнцпюллш еякх бяе ббедемн опюбхкэмн
+                textView.setVisibility(View.VISIBLE);
+                textView.setTextColor(getResources().getColor(R.color.Ok));
+                textView.setText("Ok");
+            } else {
+                textView.setVisibility(View.VISIBLE);
+                textView.setTextColor(getResources().getColor(R.color.Error));
+                textView.setText(getString(R.string.Pas1NoPas2));
+            }
+
         } else {
             textView.setVisibility(View.VISIBLE);
             textView.setTextColor(getResources().getColor(R.color.Error));

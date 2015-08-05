@@ -8,9 +8,7 @@
     android:paddingBottom="0dp"
     tools:context="com.it_lab.teleport.Registration">
 
-    <include
-        android:id="@+id/appbarMain"
-        layout="@layout/app_bar" />
+
 
     <EditText
         android:layout_width="wrap_content"
