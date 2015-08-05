@@ -1,0 +1,85 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"
+    tools:context="com.it_lab.teleport.Login">
+
+    <include
+        android:id="@+id/appbarMain"
+        layout="@layout/app_bar" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/editTextR1"
+        android:layout_below="@+id/textViewR2"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editTextR2"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/editTextR1"
+        android:layout_alignStart="@+id/editTextR1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/EmailText"
+        android:id="@+id/textViewR2"
+        android:layout_marginTop="80dp"
+        android:layout_below="@+id/appbarMain"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/PasswordText"
+        android:id="@+id/textView3"
+        android:layout_above="@+id/editTextR2"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ButtonLoginText"
+        android:id="@+id/button"
+        android:layout_marginTop="82dp"
+        android:layout_below="@+id/editTextR2"
+        android:onClick="clickLogin"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=""
+        android:id="@+id/textView4"
+        android:layout_marginTop="24dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/editTextR2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/Regist"
+        android:id="@+id/textView5"
+        android:clickable="true"
+        android:onClick="goToRegist"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

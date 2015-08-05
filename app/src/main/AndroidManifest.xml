@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -31,20 +33,23 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".VideoPlayActivity"
-            android:parentActivityName="com.it_lab.teleport.VideoPlayActivity"
-            android:label="@string/title_activity_video_play" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_video_play"
+            android:parentActivityName=".VideoPlayActivity" >
         </activity>
         <activity
             android:name=".Stream"
             android:label="@string/title_activity_stream"
             android:screenOrientation="landscape" >
         </activity>
-
-
         <activity
             android:name=".AddRequestActivity"
             android:label="@string/title_activity_add_request"
-            android:parentActivityName="com.it_lab.teleport.AddRequestActivity">
+            android:parentActivityName=".AddRequestActivity" >
+        </activity>
+        <activity
+            android:name=".Registration"
+            android:label="@string/title_activity_registration" >
         </activity>
     </application>
 

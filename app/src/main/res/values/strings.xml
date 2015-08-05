@@ -11,4 +11,17 @@
     <string name="title_activity_my_request">MyRequestActivity</string>
     <string name="ButtonStream">Показать</string>
     <string name="title_activity_add_request">AddRequestActivity</string>
+    <string name="title_activity_login">Sing in</string>
+    <string name="PasswordText">Введите пароль</string>
+    <string name="EmailText">Введите Email</string>
+    <string name="ButtonLoginText">Ок</string>
+    <string name="EmailAndPassNull">Заполните поля</string>
+    <string name="EmailNull">Введите Email</string>
+    <string name="PassNull">Введите пароль</string>
+    <string name="LoginInMenu">Авторизоваться</string>
+    <string name="title_activity_registration">Registration</string>
+    <string name="Regist">Пройти регистрацию</string>
+    <string name="PasswordText2">Введите пароль повторно</string>
+    <string name="EmailError">Неверно введен Email</string>
+
 </resources>
