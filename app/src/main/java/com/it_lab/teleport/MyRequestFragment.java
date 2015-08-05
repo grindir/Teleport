@@ -1,47 +1,42 @@
 package com.it_lab.teleport;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.SearchView;
+
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.androidquery.AQuery;
-import com.androidquery.callback.AjaxCallback;
-import com.androidquery.callback.AjaxStatus;
-import com.androidquery.util.AQUtility;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+
+
 
 /**
  * Created by alex on 27.07.15.
  */
-public class MyRequestFragment extends Fragment {
+public class MyRequestFragment extends Fragment implements SearchView.OnQueryTextListener{
     ListView listView;
-    List<Request> myRequest;
-    SharedPreferences sharedPreferences;
-    AQuery aQuery;
+    RequestFactory myRequest;
+    HTTPClient client;
     RequestAdapter adapter;
 
     @Override
     public void onPause() {
 
-        Request.saveList(sharedPreferences,myRequest);
+//        myRequest.saveList();
         super.onPause();
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,85 +46,68 @@ public class MyRequestFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.my_request_fragment, container, false);
-        sharedPreferences=inflater.getContext().getSharedPreferences("SaveMyRequest", Context.MODE_PRIVATE);
-        myRequest=new ArrayList<>();
-        aQuery=new AQuery(getActivity());
-        listView = (ListView) view.findViewById(R.id.listView);
-        initData(getActivity().getIntent());
+        myRequest = new RequestFactory(inflater.getContext(),"SaveMyRequest");
         adapter = new RequestAdapter(inflater.getContext(), myRequest, R.layout.item_my_reguest);
+
+        client=new HTTPClient(getActivity().getApplicationContext(),myRequest,adapter);
+        initData(getActivity().getIntent());
+
+        listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
-        try {
-            update();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
 
 
         return view;
 
     }
 
+    private void initData(Intent intent) {
 
-    private void update() throws JSONException {
+//         myRequest.getSaveList();
 
-        String url = "http://192.168.0.242:8080";
-        JSONObject input = new JSONObject();
+        if (intent.getAction().equals("addMyRequest")) {
 
-        input.put("REQUEST","GETLIST");
+            Request request=new Request(intent.getSerializableExtra("TAG").toString()," ",0, User.login);
+            client.add(request);
 
+        }
+        else
+        {
+            client.getList();
 
-        aQuery.post(url, input, JSONObject.class, new AjaxCallback<JSONObject>() {
-
-            @Override
-            public void callback(String url, JSONObject json, AjaxStatus status) {
-
-
-                JSONArray array = new JSONArray();
-
-                Request request;
-//                Toast.makeText(aQuery.getContext(),json.toString(), Toast.LENGTH_LONG).show();
-                Request.cleanList(myRequest);
-                try {
-                    array = json.getJSONArray("ARRAY");
-
-
-                    for (int i = 0; i < array.length(); i++) {
-
-                        JSONObject jsonObject = (JSONObject) array.get(i);
-                        request = new Request(jsonObject.get("TEG").toString(), jsonObject.get("URI").toString());
-                        myRequest.add(request);
-
-                    }
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                adapter.notifyDataSetChanged();
-            }
-        });
-
+        }
 
     }
 
-    private void initData(Intent intent) {
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setOnQueryTextListener(this);
+    }
 
-//        myRequest.add(new Request("", "begin"));
-//       myRequest.add(new Request("DemoDay", "rtsp://s-projects.ru:1935/live/android_test"));
-//       myRequest.add(new Request("Тестовый поток", "rtsp://s-projects.ru:1935/live/test.stream/playlist.m3u8\""));
-////       myRequest.add(new Request("", "next"));
-//       myRequest.add(new Request("DemoDay", "rtsp://s-projects.ru:1935/live/android_test"));
-//       myRequest.add(new Request("DemoDay", "url"));
-////        Request.getSaveList(sharedPreferences, myRequest);
-//        if(intent.getAction().equals("addMyRequest"))
-//        {
-//            myRequest.add(1,new Request(intent.getSerializableExtra("TAG").toString(),""));
-//        }
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        Request request;
+        RequestFactory factory=new RequestFactory(getActivity(),"Save");
 
+        for(int i=1;i<myRequest.size();i++)
+        {
+            request=myRequest.get(i);
+            if(request.getTeg().equals(query))
+                factory.add(request.getTeg(),request.getUri(),request.getId(),request.getAutor());
 
+        }
+        adapter.setData(factory);
+        adapter.notifyDataSetChanged();
+        return true;
+    }
 
-
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

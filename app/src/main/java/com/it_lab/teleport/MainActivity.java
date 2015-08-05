@@ -5,14 +5,18 @@ package com.it_lab.teleport;
 import android.content.Intent;
 
 import android.os.Bundle;
-import android.provider.Contacts;
-import android.provider.ContactsContract;
+
+
 import android.support.v7.app.ActionBarActivity;
+
+
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
 import android.widget.TabHost;
-import android.support.v7.widget.Toolbar;
+
 import android.widget.Toast;
 
 
@@ -20,31 +24,27 @@ import android.widget.Toast;
 
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity  {
 
-    Toolbar toolbar;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.appbarMain);
-        setSupportActionBar(toolbar);
 
         createTab();
-
-
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -59,17 +59,11 @@ public class MainActivity extends ActionBarActivity {
                 Intent intent =new Intent(this,AddRequestActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.action_login:
-                Intent intentLogin =new Intent(this,Login.class);
-                startActivity(intentLogin);
-                break;
-
         }
 
         return super.onOptionsItemSelected(item);
 
     }
-
 
     public void startStream(View view)
     {
@@ -99,6 +93,7 @@ public class MainActivity extends ActionBarActivity {
 
         tabs.setCurrentTab(0);
     }
+
 
 
 }

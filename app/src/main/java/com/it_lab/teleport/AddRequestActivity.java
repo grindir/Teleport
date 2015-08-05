@@ -1,10 +1,11 @@
 package com.it_lab.teleport;
 
+
 import android.content.Intent;
+
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -12,17 +13,16 @@ import android.widget.EditText;
 
 public class AddRequestActivity extends ActionBarActivity {
 
-    Toolbar toolbar;
+
     EditText editText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add_request);
-        toolbar = (Toolbar) findViewById(R.id.appbarAdd);
-        setSupportActionBar(toolbar);
         editText=(EditText) findViewById(R.id.editText);
-        ActionBar actionBar = getSupportActionBar();
+
+        ActionBar actionBar =getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
@@ -50,7 +50,8 @@ public class AddRequestActivity extends ActionBarActivity {
             case R.id.send:
                 Intent intent=new Intent(this,MainActivity.class);
                 intent.setAction("addMyRequest");
-                intent.putExtra("TAG",editText.getText().toString());
+                intent.putExtra("TAG", editText.getText().toString());
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
         }

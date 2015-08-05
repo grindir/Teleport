@@ -12,21 +12,33 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.androidquery.AQuery;
+import com.androidquery.callback.AjaxCallback;
+import com.androidquery.callback.AjaxStatus;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by alex on 13.07.15.
  */
 public class RequestAdapter extends BaseAdapter {
-    private List<Request> list;
+    private RequestFactory factory;
     private LayoutInflater inflater;
     private int itemID;
     private boolean flagDump;
+    private HTTPClient client;
 
-    public RequestAdapter(Context context, List<Request> list,int itemID) {
-        this.list = list;
+
+    public RequestAdapter(Context context, RequestFactory factory,int itemID) {
+
+        this.factory=factory;
         this.itemID =itemID;
         flagDump=false;
+        client=new HTTPClient(context,factory,this);
         inflater=(LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
 
 
@@ -34,12 +46,12 @@ public class RequestAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return list.size();
+        return factory.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return list.get(position);
+        return factory.get(position);
     }
 
     @Override
@@ -105,7 +117,7 @@ public class RequestAdapter extends BaseAdapter {
 
                 button=(ImageButton) view.findViewById(R.id.wathc);
                 button.setVisibility(View.VISIBLE);
-                if(!flagDump& request.getUri().equals(""))
+                if(!flagDump& request.getUri().equals(" "))
                     button.setEnabled(false);
                 else
                     button.setEnabled(true);
@@ -183,7 +195,9 @@ public class RequestAdapter extends BaseAdapter {
         return view;
     }
 
-
+    public void setData(RequestFactory factory) {
+        this.factory=factory;
+    }
 
     private void jump(@Nullable Class activity, Request request)
     {
@@ -195,8 +209,12 @@ public class RequestAdapter extends BaseAdapter {
     }
     private void remove(int id)
     {
-        list.remove(id);
+        client.remove(getRequest(id).getId());
+        factory.remove(id);
         notifyDataSetChanged();
+
+
+
     }
 
     private Request getRequest(int position)

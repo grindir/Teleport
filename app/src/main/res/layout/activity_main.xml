@@ -9,9 +9,7 @@
     tools:context=".MainActivity"
     android:weightSum="1">
 
-    <include
-        android:id="@+id/appbarMain"
-        layout="@layout/app_bar" />
+
 
 
     <TabHost

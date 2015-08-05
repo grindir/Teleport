@@ -1,9 +1,10 @@
 package com.it_lab.teleport;
 
 /**
- * Created by 31yul on 29.07.2015.
+ * Created by alex on 05.08.15.
  */
 public class User {
-
-
+    public static String login="MegaGICK";
+    public static String username;
+    public static String password;
 }

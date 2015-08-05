@@ -18,6 +18,15 @@ public class Request {
 
     private String teg;
     private String uri;
+    private long id;
+    private String autor;
+
+    public Request(String teg, String uri, long id, String autor) {
+        this.teg = teg;
+        this.uri = uri;
+        this.id = id;
+        this.autor = autor;
+    }
 
     public String getTeg() {
         return teg;
@@ -35,37 +44,32 @@ public class Request {
         this.uri = uri;
     }
 
-    public Request(String teg, String uri) {
 
-        this.teg = teg;
-        this.uri = uri;
+    public long getId() {
+        return id;
     }
 
-    static public void getSaveList(SharedPreferences mSettings, List<Request> list) {
-        String str[];
-        if (mSettings.contains("SIZE")) {
-            for (int i = 0; i < Integer.parseInt(mSettings.getString("SIZE", "")); i++) {
-                str = mSettings.getString("" + i, "").split(" ");
-                if (str.length < 2)
-                    list.add(new Request(str[0], ""));
-                else
-                    list.add(new Request(str[0], str[1]));
-
-            }
-        }
+    public void setId(long id) {
+        this.id = id;
     }
-    static public void cleanList(List<Request> list)
-    {
-        list.clear();
-        list.add(new Request("", "begin"));
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
     public JSONObject getJOSON()
     {
         JSONObject json=new JSONObject();
         try {
-            json.put("TEG", teg);
+            json.put("TAG", teg);
             json.put("URI", uri);
+            json.put("ID",id);
+            json.put("LOGIN",autor);
+
         }
         catch (JSONException e) {
                 e.printStackTrace();
@@ -75,19 +79,7 @@ public class Request {
 
         }
 
-    static public void saveList(SharedPreferences mSettings , List<Request> list) {
 
-
-        SharedPreferences.Editor editor = mSettings.edit();
-
-        editor.putString("SIZE", "" + list.size());
-        Request request;
-        for (int i = 0; i < list.size(); i++) {
-            request = list.get(i);
-            editor.putString("" + i, request.getTeg() + " " + request.getUri());
-        }
-        editor.apply();
-    }
 
 
 
