@@ -106,13 +106,15 @@ public class RequestAdapter extends BaseAdapter {
 
                 if(flagDump)
                     button.setVisibility(View.INVISIBLE);
-                else
+                else {
+                    button.setVisibility(View.VISIBLE);
                     button.setOnClickListener(new View.OnClickListener() {
 
                         public void onClick(View v) {
                             remove(position);
                         }
                     });
+                }
 
 
                 button=(ImageButton) view.findViewById(R.id.wathc);
@@ -180,7 +182,9 @@ public class RequestAdapter extends BaseAdapter {
                 button.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View v) {
+                        remove(position);
                         jump(Stream.class, request);
+
                     }
                 });
 
@@ -204,6 +208,7 @@ public class RequestAdapter extends BaseAdapter {
         Intent intent=new Intent(inflater.getContext(),activity);
         intent.putExtra("TAG", request.getTeg());
         intent.putExtra("URI", request.getUri());
+        intent.putExtra("AUTOR",request.getAutor());
         inflater.getContext().startActivity(intent);
 
     }

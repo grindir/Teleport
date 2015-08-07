@@ -31,10 +31,11 @@ public class StreamSettings extends ActionBarActivity {
     {
 
 
-            Request request = new Request(editText.getText().toString(), " ", 0, User.login);
-            HTTPClient.PushStream(this, request);
+
             Intent intent = new Intent(this, Stream.class);
-            startActivity(intent);
+            intent.putExtra("TAG",editText.getText().toString());
+            intent.putExtra("AUTOR",User.login);
+        startActivity(intent);
 
     }
 

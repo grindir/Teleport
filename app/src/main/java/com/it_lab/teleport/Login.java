@@ -3,6 +3,8 @@ package com.it_lab.teleport;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-public class Login extends Activity {
+public class Login extends ActionBarActivity {
 
     String emailS;
     EditText emailViev, passViev;
@@ -21,9 +23,14 @@ public class Login extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ActionBar actionBar =getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
         emailViev = (EditText) findViewById(R.id.editTextR1);
         passViev = (EditText) findViewById(R.id.editTextR2);
         textView = (TextView) findViewById(R.id.textView4);
+        emailViev.setText(User.login);
+        passViev.setText(User.password);
         emailE = emailViev.getText();
         passwordE = passViev.getText();
     }
@@ -43,14 +50,15 @@ public class Login extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.to_registr) {
+            goToRegist();
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-    void work(){
-    }
+
 
     public void clickLogin(View view){
         testing();
@@ -76,10 +84,13 @@ public class Login extends Activity {
                 textView.setVisibility(View.VISIBLE);
                 textView.setTextColor(getResources().getColor(R.color.Ok));
                 textView.setText("Ok");
+                User.login=emailE.toString();
+                User.password=passwordE.toString();
+                HTTPClient.login(this);
             } else {
                 textView.setVisibility(View.VISIBLE);
                 textView.setTextColor(getResources().getColor(R.color.Error));
-                textView.setText("Неверно введен Email");
+                textView.setText("РќРµРІРµСЂРЅС‹Р№ Email");
             }
 
 

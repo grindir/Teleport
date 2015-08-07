@@ -10,14 +10,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
-
-
-
-
+import android.widget.Toast;
 
 
 /**
@@ -61,6 +58,19 @@ public class MyRequestFragment extends Fragment implements SearchView.OnQueryTex
 
 
         return view;
+
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+
+        switch (item.getItemId())
+        {
+
+            case R.id.action_update:
+                client.getList();
+        }
+
+        return super.onOptionsItemSelected(item);
 
     }
 

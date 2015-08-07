@@ -2,6 +2,7 @@ package com.it_lab.teleport;
 
 
 
+import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -26,14 +27,17 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity  {
 
-
+    public static Context context;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context=getApplicationContext();
+        User.getSave();
 
+        HTTPClient.login(this);
 
         createTab();
     }
@@ -49,16 +53,22 @@ public class MainActivity extends ActionBarActivity  {
 
     public boolean onOptionsItemSelected(MenuItem item) {
 
-
+        Intent intent;
         switch (item.getItemId())
         {
             case R.id.action_settings :
                 Toast.makeText(getApplicationContext(), "Setting Pressed", Toast.LENGTH_LONG).show();
                 break;
-            case  R.id.action_go:
-                Intent intent =new Intent(this,AddRequestActivity.class);
+            case R.id.action_login:
+                intent =new Intent(this,Login.class);
+
                 startActivity(intent);
                 break;
+            case  R.id.action_go:
+                intent =new Intent(this,AddRequestActivity.class);
+                startActivity(intent);
+                break;
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -72,6 +82,7 @@ public class MainActivity extends ActionBarActivity  {
 
 
     }
+
 
     //ПРОВЕРЕН
     private void createTab(){

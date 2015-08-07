@@ -53,9 +53,8 @@
         android:layout_height="wrap_content"
         android:text="@string/ButtonLoginText"
         android:id="@+id/button"
-        android:layout_marginTop="40dp"
         android:onClick="clickRegist"
-        android:layout_below="@+id/textView4"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <TextView

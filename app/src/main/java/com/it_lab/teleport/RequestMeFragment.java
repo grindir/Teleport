@@ -4,7 +4,11 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -20,7 +24,7 @@ public class RequestMeFragment extends Fragment {
     RequestFactory requestMe;
     SharedPreferences sharedPreferences;
     HTTPClient client;
-
+    RequestAdapter adapter;
 
     @Override
     public void onPause() {
@@ -37,11 +41,12 @@ public class RequestMeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.request_me_fragment, container, false);
         sharedPreferences=inflater.getContext().getSharedPreferences("SaveRequestMe", Context.MODE_PRIVATE);
         requestMe=new RequestFactory(inflater.getContext(),"SaveRequestMe");
 
-        RequestAdapter adapter = new RequestAdapter(inflater.getContext(), requestMe, R.layout.item_request_me);
+        adapter = new RequestAdapter(inflater.getContext(), requestMe, R.layout.item_request_me);
 
         listView = (ListView) view.findViewById(R.id.listView2);
         listView.setAdapter(adapter);
@@ -52,14 +57,77 @@ public class RequestMeFragment extends Fragment {
         return view;
 
     }
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//
+//        switch (item.getItemId())
+//        {
+//
+//            case R.id.action_update:
+//                client.getList2();
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//
+//    }
 
 
     private void initData() {
 
 
 
-        client.getList();
+        client.getList2();
 
 
     }
+
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+//        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+//        searchView.setOnQueryTextListener(this);
+//    }
+
+//    @Override
+//    public boolean onQueryTextSubmit(String query) {
+//
+//        if(query.equals(""))
+//        {
+//            return true;
+//        }
+//        Request request;
+//        RequestFactory factory=new RequestFactory(getActivity(),"Save");
+//        for(int i=1;i<requestMe.size();i++)
+//        {
+//            request=requestMe.get(i);
+//            if(request.getTeg().toLowerCase().equals(query.toLowerCase()))
+//                if(request.getAutor().equals(User.login))
+//                    factory.addPersonal(request);
+//                else
+//                    factory.add(request);
+//
+//        }
+//        adapter.setData(factory);
+//        adapter.notifyDataSetChanged();
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onQueryTextChange(String newText) {
+//        Request request;
+//        RequestFactory factory=new RequestFactory(getActivity(),"Save");
+//        for(int i=1;i<requestMe.size();i++)
+//        {
+//            request=requestMe.get(i);
+//            if(request.getTeg().toLowerCase().contains(newText.toLowerCase())&&!(request.getUri().equals("next")))
+//                if(request.getAutor().equals(User.login))
+//                    factory.addPersonal(request);
+//                else
+//                    factory.add(request);
+//
+//        }
+//        adapter.setData(factory);
+//        adapter.notifyDataSetChanged();
+//        return true;
+//    }
 }

@@ -42,6 +42,9 @@
             android:label="@string/title_activity_stream"
             android:screenOrientation="landscape" >
         </activity>
+        <activity android:name=".Login"
+            android:label="Авторизация"
+            android:parentActivityName=".Login"/>
         <activity
             android:name=".AddRequestActivity"
             android:label="@string/title_activity_add_request"
@@ -49,7 +52,8 @@
         </activity>
         <activity
             android:name=".Registration"
-            android:label="@string/title_activity_registration" >
+            android:label="@string/title_activity_registration"
+            android:parentActivityName=".Registration">
         </activity>
         <activity
             android:name=".StreamSettings"

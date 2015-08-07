@@ -4,6 +4,7 @@ package com.it_lab.teleport;
 
 import android.content.Context;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.content.res.Configuration;
 import android.net.Uri;

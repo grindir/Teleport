@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class Registration extends ActionBarActivity {
 
     EditText emailViev, passViev, passViev2;
-    Editable emailE, passwordE, passwordE2;
+    String emailE, passwordE, passwordE2;
     TextView textView;
 
     @Override
@@ -24,9 +24,7 @@ public class Registration extends ActionBarActivity {
         passViev = (EditText) findViewById(R.id.editTextR2);
         passViev2 = (EditText) findViewById(R.id.editTextR3);
         textView = (TextView) findViewById(R.id.textView4);
-        emailE = emailViev.getText();
-        passwordE = passViev.getText();
-        passwordE2 = passViev2.getText();
+
     }
 
     @Override
@@ -36,28 +34,17 @@ public class Registration extends ActionBarActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+    public void clickRegist(View view){
 
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void clickRegist(){
-
+        emailE = emailViev.getText().toString();
+        passwordE = passViev.getText().toString();
+        passwordE2 = passViev2.getText().toString();
         testing();
     }
 
     private void testing() {
-        Login login = new Login();
+
         if(emailE.length()==0 && passwordE.length()==0){
             textView.setVisibility(View.VISIBLE);
             textView.setTextColor(getResources().getColor(R.color.Error));
@@ -72,13 +59,16 @@ public class Registration extends ActionBarActivity {
             textView.setVisibility(View.VISIBLE);
             textView.setTextColor(getResources().getColor(R.color.Error));
             textView.setText(R.string.PassNull);
-        } else
-        if (login.emailTest(emailE)) {
+        }
+        if (emailTest(emailE)) {
             if (passwordE.equals(passwordE2)) {
-                //рср рейяр опнцпюллш еякх бяе ббедемн опюбхкэмн
+
                 textView.setVisibility(View.VISIBLE);
                 textView.setTextColor(getResources().getColor(R.color.Ok));
                 textView.setText("Ok");
+                User.login=emailE;
+                User.password=passwordE;
+                HTTPClient.registr(this);
             } else {
                 textView.setVisibility(View.VISIBLE);
                 textView.setTextColor(getResources().getColor(R.color.Error));
@@ -93,6 +83,25 @@ public class Registration extends ActionBarActivity {
 
 
 
+        }
 
-    }
+
+    public boolean emailTest(String str){
+        int k=0;
+        String string = str.toString();
+        for(int i=0;i<string.length();i=i+1){
+            if (k==2) k = 3;
+            if (string.charAt(i) == '@'){
+                k=1;
+            }
+            if (k==1 && string.charAt(i)=='.'){
+                k=2;
+            }
+        }
+        if (k==3) return true;
+        else
+            return false;
+
+
+}
 }

@@ -18,32 +18,33 @@ import java.util.List;
 public class RequestFactory {
 
     private List<Request> list;
-    boolean log;
+    boolean flag;
+    boolean flag2;
     SharedPreferences mSettings;
 
     public RequestFactory(Context context,String nameSaveFile) {
 
         list = new ArrayList<>();
-        list.add(new Request("", "begin",0,"system"));
-        log=true;
+        flag=true;
+        flag2=true;
         mSettings=context.getSharedPreferences(nameSaveFile, Context.MODE_PRIVATE);
     }
 
 
     public void add(Request request)
     {
-        if(log)
+        if(flag)
         {
-            log=false;
+            flag=false;
             list.add(new Request("","next",0,"system"));
         }
         list.add(request);
     }
     public void add(String tag,String uri,long id,String autor)
     {
-        if(log)
+        if(flag)
         {
-            log=false;
+            flag=false;
             list.add(new Request("","next",0,"system"));
         }
         list.add(new Request(tag,uri,id,autor));
@@ -51,10 +52,20 @@ public class RequestFactory {
     }
 
     public void addPersonal(Request request){
+        if(flag2)
+        {
+            flag2=false;
+            list.add(0,new Request("","begin",0,"system"));
+        }
         list.add(1, request);
 
     }
     public void addPersonal(String tag,String uri,long id,String autor){
+        if(flag2)
+        {
+            flag2=false;
+            list.add(0,new Request("","begin",0,"system"));
+        }
         list.add(1, new Request(tag, uri,id,autor));
 
     }
@@ -94,6 +105,19 @@ public class RequestFactory {
         list.remove(id);
     }
 
+    public void addAll2(List<Request> list)
+    {
+        for(Request request:list)
+        {
+            if(request.getUri().equals(" "))
+            {
+                add(request);
+            }
+
+        }
+
+    }
+
     public void addAll(List<Request> list)
     {
         for(Request request:list)
@@ -112,7 +136,8 @@ public class RequestFactory {
      public void clean()
     {
         list.clear();
-        list.add(new Request("", "begin",0,"system"));
+        flag=true;
+        flag2=true;
     }
 
 

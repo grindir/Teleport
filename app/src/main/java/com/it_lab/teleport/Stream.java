@@ -3,6 +3,7 @@ package com.it_lab.teleport;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
 import android.hardware.Camera.PreviewCallback;
@@ -94,6 +95,10 @@ public class Stream extends Activity implements OnClickListener {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         setContentView(R.layout.activity_stream);
+
+        Intent intent =getIntent();
+        Request request = new Request(intent.getSerializableExtra("TAG").toString(), " ", 0, intent.getSerializableExtra("AUTOR").toString());
+        HTTPClient.PushStream(this, request);
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, CLASS_LABEL);
