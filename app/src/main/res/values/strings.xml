@@ -23,6 +23,10 @@
     <string name="Regist">Пройти регистрацию</string>
     <string name="PasswordText2">Введите пароль повторно</string>
     <string name="EmailError">Неверно введен Email</string>
+
     <string name="title_activity_stream_settings">StreamSettings</string>
+=======
+    <string name="Pas1NoPas2">Пароли не совподают</string>
+>>>>>>> 1d07a576d72ee6699707dae56c7836632a290ecb
 
 </resources>
