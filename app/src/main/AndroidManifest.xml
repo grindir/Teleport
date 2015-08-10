@@ -52,12 +52,12 @@
         </activity>
         <activity
             android:name=".Registration"
-            android:label="@string/title_activity_registration"
+            android:label="Регистрация"
             android:parentActivityName=".Registration">
         </activity>
         <activity
             android:name=".StreamSettings"
-            android:label="@string/title_activity_stream_settings" >
+            android:label="Настройки стрима" >
         </activity>
     </application>
 

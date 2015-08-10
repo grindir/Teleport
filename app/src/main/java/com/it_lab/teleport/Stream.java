@@ -12,7 +12,7 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.support.v7.app.ActionBarActivity;
+
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
@@ -23,6 +23,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -44,7 +46,7 @@ public class Stream extends Activity implements OnClickListener {
 
     private PowerManager.WakeLock mWakeLock;
 
-    private String ffmpeg_link ="rtmp://192.168.0.210:1936/videochat/"+User.login;
+    private String ffmpeg_link ="rtmp://s-projects.ru:8113/videochat/"+User.login;
 
     long startTime = 0;
     boolean recording = false;
@@ -106,7 +108,6 @@ public class Stream extends Activity implements OnClickListener {
         initLayout();
         startRecording();
         Log.w(LOG_TAG, "Start Button Pushed");
-        btnRecorderControl.setText("Stop");
     }
 
 
@@ -158,41 +159,42 @@ public class Stream extends Activity implements OnClickListener {
 
         /* get size of screen */
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        screenWidth = display.getWidth();
-        screenHeight = display.getHeight();
-        RelativeLayout.LayoutParams layoutParam = null;
-        LayoutInflater myInflate = null;
-        myInflate = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        RelativeLayout topLayout = new RelativeLayout(this);
-        setContentView(topLayout);
-        LinearLayout preViewLayout = (LinearLayout) myInflate.inflate(R.layout.activity_stream, null);
-        layoutParam = new RelativeLayout.LayoutParams(screenWidth, screenHeight);
-        topLayout.addView(preViewLayout, layoutParam);
+//        screenWidth = display.getWidth();
+//        screenHeight = display.getHeight();
+//        RelativeLayout.LayoutParams layoutParam = null;
+//        LayoutInflater myInflate = null;
+//        myInflate = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        RelativeLayout topLayout = new RelativeLayout(this);
+//        setContentView(topLayout);
+//        LinearLayout preViewLayout = (LinearLayout) myInflate.inflate(R.layout.activity_stream, null);
+//        layoutParam = new RelativeLayout.LayoutParams(screenWidth, screenHeight);
+//        topLayout.addView(preViewLayout, layoutParam);
 
         /* add control button: start and stop */
         btnRecorderControl = (Button) findViewById(R.id.recorder_control);
-        btnRecorderControl.setText("Start");
+        btnRecorderControl.setText("Stop");
         btnRecorderControl.setOnClickListener(this);
 
-        /* add camera view */
-        int display_width_d = (int) (1.0 * bg_screen_width * screenWidth / bg_width);
-        int display_height_d = (int) (1.0 * bg_screen_height * screenHeight / bg_height);
-        int prev_rw, prev_rh;
-        if (1.0 * display_width_d / display_height_d > 1.0 * live_width / live_height) {
-            prev_rh = display_height_d;
-            prev_rw = (int) (1.0 * display_height_d * live_width / live_height);
-        } else {
-            prev_rw = display_width_d;
-            prev_rh = (int) (1.0 * display_width_d * live_height / live_width);
-        }
-        layoutParam = new RelativeLayout.LayoutParams(prev_rw, prev_rh);
-        layoutParam.topMargin = (int) (1.0 * bg_screen_by * screenHeight / bg_height);
-        layoutParam.leftMargin = (int) (1.0 * bg_screen_bx * screenWidth / bg_width);
+//        /* add camera view */
+//        int display_width_d = (int) (1.0 * bg_screen_width * screenWidth / bg_width);
+//        int display_height_d = (int) (1.0 * bg_screen_height * screenHeight / bg_height);
+//        int prev_rw, prev_rh;
+//        if (1.0 * display_width_d / display_height_d > 1.0 * live_width / live_height) {
+//            prev_rh = display_height_d;
+//            prev_rw = (int) (1.0 * display_height_d * live_width / live_height);
+//        } else {
+//            prev_rw = display_width_d;
+//            prev_rh = (int) (1.0 * display_width_d * live_height / live_width);
+//        }
+        FrameLayout layout=(FrameLayout) findViewById(R.id.frame);
+
+//        layoutParam.topMargin = (int) (1.0 * bg_screen_by * screenHeight / bg_height);
+//        layoutParam.leftMargin = (int) (1.0 * bg_screen_bx * screenWidth / bg_width);
 
         cameraDevice = Camera.open();
         Log.i(LOG_TAG, "cameara open");
         cameraView = new CameraView(this, cameraDevice);
-        topLayout.addView(cameraView, layoutParam);
+        layout.addView(cameraView);
         Log.i(LOG_TAG, "cameara preview start: OK");
     }
 
@@ -523,7 +525,9 @@ public class Stream extends Activity implements OnClickListener {
             // This will trigger the audio recording loop to stop and then set isRecorderStart = false;
             stopRecording();
             Log.w(LOG_TAG, "Stop Button Pushed");
-            btnRecorderControl.setText("Start");
+            Intent intent =new Intent(this,MainActivity.class);
+            startActivity(intent);
+//            btnRecorderControl.setText("Start");
         }
     }
 }

@@ -20,11 +20,11 @@ import android.widget.Toast;
 /**
  * Created by alex on 27.07.15.
  */
-public class MyRequestFragment extends Fragment implements SearchView.OnQueryTextListener{
+public class MyRequestFragment extends Fragment{
     ListView listView;
-    RequestFactory myRequest;
-    HTTPClient client;
-    RequestAdapter adapter;
+    static RequestFactory myRequest;
+    static HTTPClient client;
+    static RequestAdapter adapter;
 
     @Override
     public void onPause() {
@@ -54,24 +54,12 @@ public class MyRequestFragment extends Fragment implements SearchView.OnQueryTex
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
-
-
-
         return view;
 
     }
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-
-        switch (item.getItemId())
-        {
-
-            case R.id.action_update:
-                client.getList();
-        }
-
-        return super.onOptionsItemSelected(item);
-
+    public static void update()
+    {
+        client.getList();
     }
 
     private void initData(Intent intent) {
@@ -92,41 +80,14 @@ public class MyRequestFragment extends Fragment implements SearchView.OnQueryTex
 
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setOnQueryTextListener(this);
-    }
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
 
-        if(query.equals(""))
-        {
-            return true;
-        }
+
+
+    public static void search(String newText)
+    {
         Request request;
-        RequestFactory factory=new RequestFactory(getActivity(),"Save");
-        for(int i=1;i<myRequest.size();i++)
-        {
-            request=myRequest.get(i);
-            if(request.getTeg().toLowerCase().equals(query.toLowerCase()))
-                if(request.getAutor().equals(User.login))
-                    factory.addPersonal(request);
-                else
-                    factory.add(request);
-
-        }
-        adapter.setData(factory);
-        adapter.notifyDataSetChanged();
-        return true;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        Request request;
-        RequestFactory factory=new RequestFactory(getActivity(),"Save");
+        RequestFactory factory=new RequestFactory(MainActivity.context,"Save");
         for(int i=1;i<myRequest.size();i++)
         {
             request=myRequest.get(i);
@@ -139,6 +100,5 @@ public class MyRequestFragment extends Fragment implements SearchView.OnQueryTex
         }
         adapter.setData(factory);
         adapter.notifyDataSetChanged();
-        return true;
     }
 }

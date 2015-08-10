@@ -94,7 +94,7 @@ public class RequestAdapter extends BaseAdapter {
                 else
                     if(request.getUri().equals("next"))
                     {
-                        textView.setText("Свалка");
+                        textView.setText("Все запросы");
                         button.setVisibility(View.INVISIBLE);
                         button=(ImageButton) view.findViewById(R.id.wathc);
                         button.setVisibility(View.INVISIBLE);
@@ -132,11 +132,6 @@ public class RequestAdapter extends BaseAdapter {
                     }
                 });
 
-
-
-
-
-
                 break;
 
             case R.layout.item_request_me:
@@ -157,7 +152,7 @@ public class RequestAdapter extends BaseAdapter {
                 else
                 if(request.getUri().equals("next"))
                 {
-                    textView.setText("Свалка");
+                    textView.setText("Все запросы");
                     button.setVisibility(View.INVISIBLE);
                     button=(ImageButton) view.findViewById(R.id.agree);
                     button.setVisibility(View.INVISIBLE);

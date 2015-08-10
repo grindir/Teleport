@@ -3,6 +3,7 @@ package com.it_lab.teleport;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,12 +31,21 @@ public class StreamSettings extends ActionBarActivity {
     public void onStartStream(View view)
     {
 
+        if(editText.getText().toString().length()==0) {
+
+            Toast toast = Toast.makeText(getApplicationContext(),"Введите тег",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
+
+        }
+        else {
 
 
             Intent intent = new Intent(this, Stream.class);
-            intent.putExtra("TAG",editText.getText().toString());
-            intent.putExtra("AUTOR",User.login);
-        startActivity(intent);
+            intent.putExtra("TAG", editText.getText().toString());
+            intent.putExtra("AUTOR", User.login);
+            startActivity(intent);
+        }
 
     }
 

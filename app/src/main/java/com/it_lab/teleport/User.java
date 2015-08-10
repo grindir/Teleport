@@ -10,6 +10,7 @@ public class User {
     public static String login;
     public static String username;
     public static String password;
+    public static boolean loginin;
     public static void Save()
     {
         SharedPreferences sharedPreferences=MainActivity.context.getSharedPreferences("SaveUser",Context.MODE_PRIVATE);
@@ -25,3 +26,4 @@ public class User {
         password=sharedPreferences.getString("password","");
     }
 }
+

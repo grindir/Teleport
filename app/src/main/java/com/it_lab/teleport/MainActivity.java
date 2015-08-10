@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
 
+import android.support.v7.widget.SearchView;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,7 +27,7 @@ import android.widget.Toast;
 
 
 
-public class MainActivity extends ActionBarActivity  {
+public class MainActivity extends ActionBarActivity implements SearchView.OnQueryTextListener {
 
     public static Context context;
 
@@ -35,9 +37,11 @@ public class MainActivity extends ActionBarActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context=getApplicationContext();
-        User.getSave();
 
-        HTTPClient.login(this);
+        if(!User.loginin) {
+            User.getSave();
+            HTTPClient.login(this);
+        }
 
         createTab();
     }
@@ -47,6 +51,8 @@ public class MainActivity extends ActionBarActivity  {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setOnQueryTextListener(this);
         return true;
 
     }
@@ -65,8 +71,20 @@ public class MainActivity extends ActionBarActivity  {
                 startActivity(intent);
                 break;
             case  R.id.action_go:
-                intent =new Intent(this,AddRequestActivity.class);
-                startActivity(intent);
+                if(!User.loginin)
+                {
+                    Toast toast = Toast.makeText(context, "Добавлять запросы могут только зарегистрированные пользователи",Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else {
+                    intent = new Intent(this, AddRequestActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.action_update:
+                MyRequestFragment.update();
+                RequestMeFragment.update();
                 break;
 
         }
@@ -82,6 +100,7 @@ public class MainActivity extends ActionBarActivity  {
 
 
     }
+
 
 
     //ПРОВЕРЕН
@@ -106,5 +125,17 @@ public class MainActivity extends ActionBarActivity  {
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        MyRequestFragment.search(query);
+        RequestMeFragment.search(query);
+        return false;
+    }
 
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        MyRequestFragment.search(newText);
+        RequestMeFragment.search(newText);
+        return false;
+    }
 }

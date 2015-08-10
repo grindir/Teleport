@@ -2,6 +2,7 @@ package com.it_lab.teleport;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
@@ -18,7 +19,7 @@ import java.util.List;
  * Created by alex on 31.07.15.
  */
 public class HTTPClient {
-    static String url = "http://192.168.0.231:8080";
+    static String url = "http://s-projects.ru:8110";
     AQuery aQuery;
     RequestFactory factory;
     RequestAdapter adapter;
@@ -51,10 +52,19 @@ public class HTTPClient {
             @Override
             public void callback(String url, JSONObject json, AjaxStatus status) {
                 try {
-                    if(json.get("Status").toString().equals("OK"));
+                    if(json.get("Status").toString().equals("OK"))
                     {
-                        Toast.makeText(context, "Регистрация прошла успешно", Toast.LENGTH_SHORT).show();
+
+                        Toast toast = Toast.makeText(context, "Регистрация прошла успешно",Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
                         login(context);
+                    }
+                    else
+                    {
+                        Toast toast = Toast.makeText(context, "Неверные данные",Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -88,6 +98,18 @@ public class HTTPClient {
                     if(json.get("Status").toString().equals("OK"))
                     {
                         User.Save();
+                        Toast toast = Toast.makeText(context, "Вы вошли как "+User.login,Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                        User.loginin=true;
+                    }
+                    else
+                    {
+                        if(User.login.length()!=0) {
+                            Toast toast = Toast.makeText(context, "Неверные данные", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -104,7 +126,6 @@ public class HTTPClient {
             json.put("REQUEST","PUSHSTREAM");
             json.put("DEFENDANT",User.login);
             json.put("OBJECT",request.getJOSON());
-
 
         } catch (JSONException e) {
             e.printStackTrace();

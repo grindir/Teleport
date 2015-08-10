@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class AddRequestActivity extends ActionBarActivity {
@@ -48,11 +50,19 @@ public class AddRequestActivity extends ActionBarActivity {
             case R.id.action_settings:
                 return true;
             case R.id.send:
-                Intent intent=new Intent(this,MainActivity.class);
-                intent.setAction("addMyRequest");
-                intent.putExtra("TAG", editText.getText().toString());
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                if(editText.getText().toString().length()==0) {
+
+                    Toast toast = Toast.makeText(getApplicationContext(), "Введите тег", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else {
+                    Intent intent = new Intent(this, MainActivity.class);
+                    intent.setAction("addMyRequest");
+                    intent.putExtra("TAG", editText.getText().toString());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
 
         }
 

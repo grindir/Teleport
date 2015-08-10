@@ -21,10 +21,10 @@ import java.util.List;
  */
 public class RequestMeFragment extends Fragment {
     ListView listView;
-    RequestFactory requestMe;
+    static RequestFactory requestMe;
     SharedPreferences sharedPreferences;
-    HTTPClient client;
-    RequestAdapter adapter;
+    static HTTPClient client;
+    static RequestAdapter adapter;
 
     @Override
     public void onPause() {
@@ -79,6 +79,27 @@ public class RequestMeFragment extends Fragment {
         client.getList2();
 
 
+    }
+    public static void update()
+    {
+        client.getList2();
+    }
+    public static void search(String newText)
+    {
+        Request request;
+        RequestFactory factory=new RequestFactory(MainActivity.context,"Save");
+        for(int i=1;i<requestMe.size();i++)
+        {
+            request=requestMe.get(i);
+            if(request.getTeg().toLowerCase().contains(newText.toLowerCase())&&!(request.getUri().equals("next")))
+                if(request.getAutor().equals(User.login))
+                    factory.addPersonal(request);
+                else
+                    factory.add(request);
+
+        }
+        adapter.setData(factory);
+        adapter.notifyDataSetChanged();
     }
 
 //    @Override

@@ -124,10 +124,12 @@ public class RequestFactory {
         {
             if(request.getAutor().equals(User.login))
             {
-                addPersonal(request);
+                if(!(request.getUri().contains(User.login)))
+                    addPersonal(request);
             }
             else
-                add(request);
+                if(!(request.getUri().equals(" ")))
+                    add(request);
         }
 
 
