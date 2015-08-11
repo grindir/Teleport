@@ -12,77 +12,24 @@
 
 
 
-    <TabHost
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tabHost"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.95">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"></TabWidget>
-
-
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:id="@+id/tab1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <fragment
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:name="com.it_lab.teleport.MyRequestFragment"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tab2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <fragment
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:name="com.it_lab.teleport.RequestMeFragment"/>
-
-                </LinearLayout>
-
-            </FrameLayout>
-            <android.support.v4.view.ViewPager
+    <android.support.v4.view.ViewPager
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/pager"
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-    </TabHost>
+                android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    </android.support.v4.view.ViewPager>
 
-        <Button
-            android:layout_width="wrap_content"
+
+
+    <Button
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.95"
+            android:layout_weight="1"
             android:onClick="startStream"
             android:text="Показать"
             android:id="@+id/startStream" />
-    </LinearLayout>
+
 
 </LinearLayout>

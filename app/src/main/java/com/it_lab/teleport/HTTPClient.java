@@ -119,7 +119,7 @@ public class HTTPClient {
 
     }
 
-    public static void  PushStream(Context context,Request request){
+    public static void  PushStream(Context context, final Request request){
         AQuery aQuery=new AQuery(context);
         JSONObject json=new JSONObject();
         try {
@@ -135,10 +135,38 @@ public class HTTPClient {
 
             @Override
             public void callback(String url, JSONObject json, AjaxStatus status) {
+                try {
+                    request.setId(Integer.parseInt(json.get("ID").toString()));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }});
 
     }
 
+
+    public static void  remove(Context comtext,long id)
+    {
+        AQuery aQuery=new AQuery(comtext);
+        JSONObject json=new JSONObject();
+        try {
+            json.put("REQUEST","DELOBJECT");
+            json.put("ID", id);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        aQuery.post(url, json, JSONObject.class, new AjaxCallback<JSONObject>() {
+
+            @Override
+            public void callback(String url, JSONObject json, AjaxStatus status) {
+
+
+            }});
+
+    }
 
 
 

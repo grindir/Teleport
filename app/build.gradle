@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.it_lab.teleport"
+        applicationId "com.alexwolf.teleport"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -38,4 +38,18 @@ dependencies {
 
     compile 'org.bytedeco.javacpp-presets:ffmpeg:2.7.1-1.0'
     compile 'org.bytedeco:javacpp-presets:1.0'
+}
+
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.2.3'
+    }
+    repositories {
+        jcenter()
+    }
+}
+allprojects {
+    repositories {
+        jcenter()
+    }
 }

@@ -515,6 +515,12 @@ public class Stream extends Activity implements OnClickListener {
         }
     }
 
+    public void onStopStream(View view)
+    {
+        stopRecording();
+        Intent intent =new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
     @Override
     public void onClick(View v) {
         if (!recording) {
@@ -525,9 +531,8 @@ public class Stream extends Activity implements OnClickListener {
             // This will trigger the audio recording loop to stop and then set isRecorderStart = false;
             stopRecording();
             Log.w(LOG_TAG, "Stop Button Pushed");
-            Intent intent =new Intent(this,MainActivity.class);
-            startActivity(intent);
-//            btnRecorderControl.setText("Start");
+
+            btnRecorderControl.setText("Start");
         }
     }
 }

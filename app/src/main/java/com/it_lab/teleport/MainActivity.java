@@ -2,49 +2,142 @@ package com.it_lab.teleport;
 
 
 
+
+
 import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
 
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+
 
 
 import android.support.v7.widget.SearchView;
 import android.view.Gravity;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import android.widget.TabHost;
-
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
-
-
-
-public class MainActivity extends ActionBarActivity implements SearchView.OnQueryTextListener {
+public class MainActivity extends ActionBarActivity implements SearchView.OnQueryTextListener,ActionBar.TabListener {
 
     public static Context context;
-
+     ViewPager pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        context=getApplicationContext();
-
+        context=this;
+         pager=(ViewPager)findViewById(R.id.pager);
         if(!User.loginin) {
             User.getSave();
             HTTPClient.login(this);
         }
 
-        createTab();
+
+        List<Fragment> fragments=new ArrayList<>();
+        fragments.add(Fragment.instantiate(this, MyRequestFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, RequestMeFragment.class.getName()));
+
+        final ActionBar bar=getSupportActionBar();
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        pager.setOffscreenPageLimit(fragments.size());
+        PagerAdapter pagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
+
+        pager.setAdapter(pagerAdapter);
+        pager.setCurrentItem(0);
+
+        bar.addTab(bar.newTab().setText("Посмотреть")
+                .setTabListener(this));
+        bar.addTab(bar.newTab().setText("Показать")
+                .setTabListener(this));
+
+
+
+
+        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+                // on changing the page
+                // make respected tab selected
+                bar.setSelectedNavigationItem(position);
+            }
+
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+            }
+        });
+
+
     }
+
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+        pager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
+
+    class PagerAdapter extends FragmentPagerAdapter  {
+
+        private List<Fragment> fragments;
+
+        public PagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+            super(fm);
+            this.fragments = fragments;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return this.fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return this.fragments.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            String str="";
+            if(position==0)
+                str="Посмотреть";
+            else
+                str="Показать";
+            return str;
+        }
+    }
+
 
 
     @Override
@@ -99,29 +192,6 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
         startActivity(intent);
 
 
-    }
-
-
-
-    //ПРОВЕРЕН
-    private void createTab(){
-
-        TabHost tabs = (TabHost) findViewById(R.id.tabHost);
-
-        tabs.setup();
-
-        TabHost.TabSpec spec = tabs.newTabSpec("tag1");
-
-        spec.setContent(R.id.tab1);
-        spec.setIndicator("Посмотреть");
-        tabs.addTab(spec);
-
-        spec = tabs.newTabSpec("tag2");
-        spec.setContent(R.id.tab2);
-        spec.setIndicator("Показать");
-        tabs.addTab(spec);
-
-        tabs.setCurrentTab(0);
     }
 
 

@@ -1,9 +1,10 @@
 package com.it_lab.teleport;
 
-import android.app.Fragment;
+
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.SearchView;
 
 import android.view.LayoutInflater;
@@ -20,7 +21,7 @@ import android.widget.Toast;
 /**
  * Created by alex on 27.07.15.
  */
-public class MyRequestFragment extends Fragment{
+public class MyRequestFragment extends Fragment {
     ListView listView;
     static RequestFactory myRequest;
     static HTTPClient client;
