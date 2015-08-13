@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="stop"
         android:id="@+id/button2"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:onClick="onStopStream" />
@@ -31,6 +31,6 @@
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
 </LinearLayout>

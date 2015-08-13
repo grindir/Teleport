@@ -71,17 +71,18 @@ public class Stream extends Activity implements OnClickListener {
     private CameraView cameraView;
 
     private Frame yuvImage = null;
+    private Request request;
 
     /* layout setting */
-    private final int bg_screen_bx = 232;
-    private final int bg_screen_by = 128;
-    private final int bg_screen_width = 700;
-    private final int bg_screen_height = 500;
-    private final int bg_width = 1123;
-    private final int bg_height = 715;
-    private final int live_width = 640;
-    private final int live_height = 480;
-    private int screenWidth, screenHeight;
+//    private final int bg_screen_bx = 232;
+//    private final int bg_screen_by = 128;
+//    private final int bg_screen_width = 700;
+//    private final int bg_screen_height = 500;
+//    private final int bg_width = 1123;
+//    private final int bg_height = 715;
+//    private final int live_width = 640;
+//    private final int live_height = 480;
+//    private int screenWidth, screenHeight;
     private Button btnRecorderControl;
 
     /* The number of seconds in the continuous record loop (or 0 to disable loop). */
@@ -99,7 +100,7 @@ public class Stream extends Activity implements OnClickListener {
         setContentView(R.layout.activity_stream);
 
         Intent intent =getIntent();
-        Request request = new Request(intent.getSerializableExtra("TAG").toString(), " ", 0, intent.getSerializableExtra("AUTOR").toString());
+        request = new Request(intent.getSerializableExtra("TAG").toString(), " ", 0, intent.getSerializableExtra("AUTOR").toString());
         HTTPClient.PushStream(this, request);
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -136,6 +137,7 @@ public class Stream extends Activity implements OnClickListener {
     protected void onDestroy() {
         super.onDestroy();
 
+        HTTPClient.remove(this, request.getId());
         recording = false;
 
         if (cameraView != null) {
@@ -152,39 +154,22 @@ public class Stream extends Activity implements OnClickListener {
             mWakeLock.release();
             mWakeLock = null;
         }
+
     }
 
 
     private void initLayout() {
 
-        /* get size of screen */
-        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-//        screenWidth = display.getWidth();
-//        screenHeight = display.getHeight();
-//        RelativeLayout.LayoutParams layoutParam = null;
-//        LayoutInflater myInflate = null;
-//        myInflate = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        RelativeLayout topLayout = new RelativeLayout(this);
-//        setContentView(topLayout);
-//        LinearLayout preViewLayout = (LinearLayout) myInflate.inflate(R.layout.activity_stream, null);
-//        layoutParam = new RelativeLayout.LayoutParams(screenWidth, screenHeight);
-//        topLayout.addView(preViewLayout, layoutParam);
 
-        /* add control button: start and stop */
+        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+
+
+
         btnRecorderControl = (Button) findViewById(R.id.recorder_control);
         btnRecorderControl.setText("Stop");
         btnRecorderControl.setOnClickListener(this);
 
-//        /* add camera view */
-//        int display_width_d = (int) (1.0 * bg_screen_width * screenWidth / bg_width);
-//        int display_height_d = (int) (1.0 * bg_screen_height * screenHeight / bg_height);
-//        int prev_rw, prev_rh;
-//        if (1.0 * display_width_d / display_height_d > 1.0 * live_width / live_height) {
-//            prev_rh = display_height_d;
-//            prev_rw = (int) (1.0 * display_height_d * live_width / live_height);
-//        } else {
-//            prev_rw = display_width_d;
-//            prev_rh = (int) (1.0 * display_width_d * live_height / live_width);
+
 //        }
         FrameLayout layout=(FrameLayout) findViewById(R.id.frame);
 
@@ -314,6 +299,7 @@ public class Stream extends Activity implements OnClickListener {
 
         }
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -515,12 +501,8 @@ public class Stream extends Activity implements OnClickListener {
         }
     }
 
-    public void onStopStream(View view)
-    {
-        stopRecording();
-        Intent intent =new Intent(this,MainActivity.class);
-        startActivity(intent);
-    }
+
+
     @Override
     public void onClick(View v) {
         if (!recording) {

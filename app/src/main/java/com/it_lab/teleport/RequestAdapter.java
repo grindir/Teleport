@@ -177,8 +177,9 @@ public class RequestAdapter extends BaseAdapter {
                 button.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View v) {
+                        Request request1=new Request(request.getTeg(),request.getUri(),0,request.getAutor());
                         remove(position);
-                        jump(Stream.class, request);
+                        jump(Stream.class, request1);
 
                     }
                 });

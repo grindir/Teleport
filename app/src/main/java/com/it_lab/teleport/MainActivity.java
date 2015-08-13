@@ -58,6 +58,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
         final ActionBar bar=getSupportActionBar();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
         pager.setOffscreenPageLimit(fragments.size());
         PagerAdapter pagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
 
@@ -155,9 +156,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
         Intent intent;
         switch (item.getItemId())
         {
-            case R.id.action_settings :
-                Toast.makeText(getApplicationContext(), "Setting Pressed", Toast.LENGTH_LONG).show();
-                break;
+
             case R.id.action_login:
                 intent =new Intent(this,Login.class);
 
@@ -188,8 +187,18 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
     public void startStream(View view)
     {
-        Intent intent=new Intent(this,StreamSettings.class);
-        startActivity(intent);
+        if(!User.loginin)
+        {
+            Toast toast = Toast.makeText(context, "Показывать могу только зарегестрированные пользователи",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+        else
+        {
+            Intent intent=new Intent(this,StreamSettings.class);
+            startActivity(intent);
+        }
+
 
 
     }

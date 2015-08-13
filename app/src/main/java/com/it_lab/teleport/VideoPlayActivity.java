@@ -2,6 +2,8 @@ package com.it_lab.teleport;
 
 
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 
 import android.content.Intent;
@@ -20,6 +22,8 @@ import io.vov.vitamio.LibsChecker;
 import android.view.MotionEvent;
 import android.view.View;
 
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import io.vov.vitamio.MediaPlayer;
@@ -33,6 +37,8 @@ public class VideoPlayActivity extends ActionBarActivity {
 
     private VideoView videoView;
     private String uri;
+    ProgressDialog mProgressDialog;
+
 
 
     @Override
@@ -48,8 +54,12 @@ public class VideoPlayActivity extends ActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getIntent().getSerializableExtra("TAG").toString());
 
-
-
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // устанавливаем стиль
+        mProgressDialog.setMessage("Загружаю. Подождите...");  // задаем текст
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.show();
 
 
         uri=getIntent().getSerializableExtra("URI").toString();
@@ -59,6 +69,12 @@ public class VideoPlayActivity extends ActionBarActivity {
         videoView.requestFocus();
         videoView.setBufferSize(1);
         videoView.start();
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                mProgressDialog.dismiss();
+            }
+        });
 
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -67,13 +83,22 @@ public class VideoPlayActivity extends ActionBarActivity {
         }
         else
         {
+
             videoView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    if(videoView.isPlaying())
+
+                    ImageView imageView=(ImageView) findViewById(id.imageView);
+                    imageView.setImageDrawable(getResources().getDrawable( drawable.bigpause));
+                    if(videoView.isPlaying()) {
                         videoView.pause();
-                    else
+                        imageView.setVisibility(View.VISIBLE);
+                    }
+                    else {
+
+                        imageView.setVisibility(View.INVISIBLE);
                         videoView.start();
+                    }
                     return false;
                 }
             });

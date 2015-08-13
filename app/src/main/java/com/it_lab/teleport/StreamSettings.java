@@ -1,6 +1,7 @@
 package com.it_lab.teleport;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -11,13 +12,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-public class StreamSettings extends ActionBarActivity {
+public class StreamSettings extends ActionBarActivity  {
     EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stream_settings);
+        ActionBar actionBar =getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
         editText=(EditText) findViewById(R.id.editText2);
 
     }

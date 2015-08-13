@@ -42,21 +42,25 @@
             android:screenOrientation="landscape" >
         </activity>
         <activity android:name=".Login"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="Авторизация"
             android:parentActivityName=".Login"/>
         <activity
             android:name=".AddRequestActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_add_request"
             android:parentActivityName=".AddRequestActivity" >
         </activity>
         <activity
             android:name=".Registration"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="Регистрация"
             android:parentActivityName=".Registration">
         </activity>
         <activity
             android:name=".StreamSettings"
-            android:label="Настройки стрима" >
+            android:label="Настройки стрима"
+            android:parentActivityName=".StreamSettings">
         </activity>
     </application>
 

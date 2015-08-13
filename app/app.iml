@@ -104,8 +104,8 @@
     <orderEntry type="library" exported="" name="appcompat-v7-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="vitamio-release-" level="project" />
     <orderEntry type="library" exported="" name="flycapture-2.7.3.19-1.0" level="project" />
-    <orderEntry type="library" exported="" name="ffmpeg-2.7.1-1.0-android-arm" level="project" />
     <orderEntry type="library" exported="" name="flandmark-1.07-1.0" level="project" />
+    <orderEntry type="library" exported="" name="ffmpeg-2.7.1-1.0-android-arm" level="project" />
     <orderEntry type="library" exported="" name="javacv-1.0" level="project" />
     <orderEntry type="library" exported="" name="androidquery" level="project" />
     <orderEntry type="library" exported="" name="ffmpeg-2.7.1-1.0" level="project" />

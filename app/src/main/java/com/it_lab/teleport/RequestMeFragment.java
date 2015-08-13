@@ -92,63 +92,12 @@ public class RequestMeFragment extends Fragment {
         {
             request=requestMe.get(i);
             if(request.getTeg().toLowerCase().contains(newText.toLowerCase())&&!(request.getUri().equals("next")))
-                if(request.getAutor().equals(User.login))
-                    factory.addPersonal(request);
-                else
-                    factory.add(request);
+                factory.add(request);
 
         }
         adapter.setData(factory);
         adapter.notifyDataSetChanged();
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-//        searchView.setOnQueryTextListener(this);
-//    }
 
-//    @Override
-//    public boolean onQueryTextSubmit(String query) {
-//
-//        if(query.equals(""))
-//        {
-//            return true;
-//        }
-//        Request request;
-//        RequestFactory factory=new RequestFactory(getActivity(),"Save");
-//        for(int i=1;i<requestMe.size();i++)
-//        {
-//            request=requestMe.get(i);
-//            if(request.getTeg().toLowerCase().equals(query.toLowerCase()))
-//                if(request.getAutor().equals(User.login))
-//                    factory.addPersonal(request);
-//                else
-//                    factory.add(request);
-//
-//        }
-//        adapter.setData(factory);
-//        adapter.notifyDataSetChanged();
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onQueryTextChange(String newText) {
-//        Request request;
-//        RequestFactory factory=new RequestFactory(getActivity(),"Save");
-//        for(int i=1;i<requestMe.size();i++)
-//        {
-//            request=requestMe.get(i);
-//            if(request.getTeg().toLowerCase().contains(newText.toLowerCase())&&!(request.getUri().equals("next")))
-//                if(request.getAutor().equals(User.login))
-//                    factory.addPersonal(request);
-//                else
-//                    factory.add(request);
-//
-//        }
-//        adapter.setData(factory);
-//        adapter.notifyDataSetChanged();
-//        return true;
-//    }
 }

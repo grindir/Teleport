@@ -1,5 +1,6 @@
 package com.it_lab.teleport;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,6 +19,7 @@ public class Registration extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         emailViev = (EditText) findViewById(R.id.editTextR1);
